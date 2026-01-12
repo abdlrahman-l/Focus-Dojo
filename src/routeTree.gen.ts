@@ -9,12 +9,36 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZenTypeRouteImport } from './routes/zen-type'
+import { Route as VocalGymRouteImport } from './routes/vocal-gym'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as LanguageRouteImport } from './routes/language'
+import { Route as FocusReaderRouteImport } from './routes/focus-reader'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ZenTypeRoute = ZenTypeRouteImport.update({
+  id: '/zen-type',
+  path: '/zen-type',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VocalGymRoute = VocalGymRouteImport.update({
+  id: '/vocal-gym',
+  path: '/vocal-gym',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LanguageRoute = LanguageRouteImport.update({
   id: '/language',
   path: '/language',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FocusReaderRoute = FocusReaderRouteImport.update({
+  id: '/focus-reader',
+  path: '/focus-reader',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +49,100 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/focus-reader': typeof FocusReaderRoute
   '/language': typeof LanguageRoute
+  '/settings': typeof SettingsRoute
+  '/vocal-gym': typeof VocalGymRoute
+  '/zen-type': typeof ZenTypeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/focus-reader': typeof FocusReaderRoute
   '/language': typeof LanguageRoute
+  '/settings': typeof SettingsRoute
+  '/vocal-gym': typeof VocalGymRoute
+  '/zen-type': typeof ZenTypeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/focus-reader': typeof FocusReaderRoute
   '/language': typeof LanguageRoute
+  '/settings': typeof SettingsRoute
+  '/vocal-gym': typeof VocalGymRoute
+  '/zen-type': typeof ZenTypeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/language'
+  fullPaths:
+    | '/'
+    | '/focus-reader'
+    | '/language'
+    | '/settings'
+    | '/vocal-gym'
+    | '/zen-type'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/language'
-  id: '__root__' | '/' | '/language'
+  to:
+    | '/'
+    | '/focus-reader'
+    | '/language'
+    | '/settings'
+    | '/vocal-gym'
+    | '/zen-type'
+  id:
+    | '__root__'
+    | '/'
+    | '/focus-reader'
+    | '/language'
+    | '/settings'
+    | '/vocal-gym'
+    | '/zen-type'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FocusReaderRoute: typeof FocusReaderRoute
   LanguageRoute: typeof LanguageRoute
+  SettingsRoute: typeof SettingsRoute
+  VocalGymRoute: typeof VocalGymRoute
+  ZenTypeRoute: typeof ZenTypeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zen-type': {
+      id: '/zen-type'
+      path: '/zen-type'
+      fullPath: '/zen-type'
+      preLoaderRoute: typeof ZenTypeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vocal-gym': {
+      id: '/vocal-gym'
+      path: '/vocal-gym'
+      fullPath: '/vocal-gym'
+      preLoaderRoute: typeof VocalGymRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/language': {
       id: '/language'
       path: '/language'
       fullPath: '/language'
       preLoaderRoute: typeof LanguageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/focus-reader': {
+      id: '/focus-reader'
+      path: '/focus-reader'
+      fullPath: '/focus-reader'
+      preLoaderRoute: typeof FocusReaderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +157,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FocusReaderRoute: FocusReaderRoute,
   LanguageRoute: LanguageRoute,
+  SettingsRoute: SettingsRoute,
+  VocalGymRoute: VocalGymRoute,
+  ZenTypeRoute: ZenTypeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

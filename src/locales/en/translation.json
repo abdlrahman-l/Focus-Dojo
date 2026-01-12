@@ -3,5 +3,21 @@
     "initializeProtocol": "INITIALIZE PROTOCOL",
     "indonesian": "Bahasa Indonesia",
     "english": "English",
-    "title": "FOCUS DOJO"
+    "title": "FOCUS DOJO",
+    "dashboard": {
+        "welcomeBack": "Welcome back, {{name}}",
+        "recoveryScore": "RECOVERY SCORE",
+        "focusReader": {
+            "title": "FOCUS READER",
+            "description": "DEEP READING DRILL"
+        },
+        "vocalGym": {
+            "title": "VOCAL GYM",
+            "description": "ARTICULATION TRAINING"
+        },
+        "zenType": {
+            "title": "ZEN TYPE",
+            "description": "PATIENCE & ACCURACY"
+        }
+    }
 }

@@ -3,5 +3,21 @@
     "initializeProtocol": "INISIALISASI PROTOKOL",
     "indonesian": "Bahasa Indonesia",
     "english": "Bahasa Inggris",
-    "title": "FOCUS DOJO"
+    "title": "FOCUS DOJO",
+    "dashboard": {
+        "welcomeBack": "Selamat datang kembali, {{name}}",
+        "recoveryScore": "SKOR PEMULIHAN",
+        "focusReader": {
+            "title": "BACA FOKUS",
+            "description": "LATIHAN MEMBACA MENDALAM"
+        },
+        "vocalGym": {
+            "title": "GYM VOKAL",
+            "description": "LATIHAN ARTIKULASI"
+        },
+        "zenType": {
+            "title": "KETIK ZEN",
+            "description": "KESABARAN & AKURASI"
+        }
+    }
 }
