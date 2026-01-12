@@ -1,82 +1,55 @@
-# KlikDokter Live Chat
+# 🧠 Focus Dojo
 
-A live chat dashboard application for doctor consultations, built with Vite, React, Tanstack Router, and Shadcn UI.
+> **Digital Rehab for the Dopamine-Fried Brain.**
+> A cognitive training application designed to restore focus, articulation, and mental clarity.
 
-![alt text](public/images/512x512.png)
+![Focus Dojo Banner](./public/images/app-icon.webp)
 
-## Features
+## 📖 Philosophy
 
-- Accessible
-- Extra custom components
-- RTL support
+In an era defined by "TikTok Brain" and endless notifications, our ability to perform Deep Work is eroding. **Focus Dojo** is not designed to entertain you. It is designed to retrain your brain using an **Anti-Dopamine** approach:
 
-<details>
-<summary>Customized Components (click to expand)</summary>
+- **OLED Black UI:** No bright colors or cheap gamification triggers.
+- **High Friction:** The "Hold to Read" mechanic forces conscious interaction.
+- **Zero Distraction:** Single-tasking only. Tunnel vision enabled.
 
-This project uses Shadcn UI components, but some have been slightly modified for better RTL (Right-to-Left) support and other improvements. These customized components differ from the original Shadcn UI versions.
+## 🚀 Features
 
-If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest add <component>`), it's generally safe for non-customized components. For the listed customized ones, you may need to manually merge changes to preserve the project's modifications and avoid overwriting RTL support or other updates.
+### 1. 👁️ Focus Reader (Tunnel Vision)
 
-> If you don't require RTL support, you can safely update the 'RTL Updated Components' via the Shadcn CLI, as these changes are primarily for RTL compatibility. The 'Modified Components' may have other customizations to consider.
+A reading mode that acts like "blinders" for your brain.
 
-### Modified Components
+- **Single Paragraph Display:** Only shows one block of text at a time.
+- **Hold Interaction:** You must physically **hold the screen** to keep the text visible/focused.
+- **Benefits:** Prevents skimming and trains visual patience.
 
-- scroll-area
-- sonner
-- separator
+### 2. ⌨️ Zen Type (Precision Drill)
 
-### RTL Updated Components
+Retype philosophical quotes or coding snippets with zero room for error.
 
-- alert-dialog
-- calendar
-- command
-- dialog
-- dropdown-menu
-- select
-- table
-- sheet
-- sidebar
-- switch
+- **Backspace Disabled:** You cannot delete mistakes. One typo means restarting the entire sentence.
+- **Benefits:** Trains precision, mindfulness, and calm under pressure.
 
-**Notes:**
+### 3. 🎙️ Vocal Gym (Articulation)
 
-- **Modified Components**: These have general updates, potentially including RTL adjustments.
-- **RTL Updated Components**: These have specific changes for RTL language support (e.g., layout, positioning).
-- For implementation details, check the source files in `src/components/ui/`.
-- All other Shadcn UI components in the project are standard and can be safely updated via the CLI.
+Speech drills to improve clarity and enunciation.
 
-</details>
+- **Tech:** Powered by the **Web Speech API**.
+- **Features:** Automatic language accent detection (ID/EN) based on user preference.
 
-## Tech Stack
+---
 
-**UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
+## 🛠️ Tech Stack (The Modern CSR Stack)
 
-**Build Tool:** [Vite](https://vitejs.dev/)
+This project is built using the latest, most performant React stack available in 2025.
 
-**Routing:** [TanStack Router](https://tanstack.com/router/latest)
+- **Framework:** React + TypeScript
+- **Build Tool:** Vite
+- **Routing:** [TanStack Router](https://tanstack.com/router) (File-based, Type-safe)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) (Oxide Engine, Native CSS Variables)
+- **State/Data:** TanStack Query (React Query)
+- **I18n:** react-i18next + i18next-browser-languagedetector
+- **CMS (Database):** Google Sheets (Fetched via `papaparse` as CSV)
+- **Fonts:** Inter (UI), Merriweather (Reader), JetBrains Mono (Data)
 
-**Type Checking:** [TypeScript](https://www.typescriptlang.org/)
-
-**Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
-
-**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
-
-## Run Locally
-
-Go to the project directory
-
-```bash
-  cd your-project-directory
-```
-
-Install dependencies
-
-```bash
-  pnpm install
-```
-
-Start the server
-
-```bash
-  pnpm run dev
-```
+---
