@@ -19,5 +19,43 @@
             "title": "ZEN TYPE",
             "description": "PATIENCE & ACCURACY"
         }
+    },
+    "vocalGymFeature": {
+        "articulationDrill": "ARTICULATION DRILL",
+        "readAloud": "READ ALOUD",
+        "listening": "Listening...",
+        "speakClearly": "Speak clearly and slowly.",
+        "pressMic": "Press mic to start",
+        "phrase": "She sells seashells by the seashore.",
+        "changeSentence": "Change Sentence",
+        "drills": [
+            "She sells seashells by the seashore.",
+            "Peter Piper picked a peck of pickled peppers.",
+            "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+            "Fuzzy Wuzzy was a bear, Fuzzy Wuzzy had no hair.",
+            "I scream, you scream, we all scream for ice cream."
+        ]
+    },
+    "scienceModal": {
+        "title": "RESEARCH DATA",
+        "validatedBy": "Validated by Neuroscience",
+        "close": "Close",
+        "features": {
+            "focusReader": {
+                "title": "Visual Gating (Focus Reader)",
+                "content": "Utilizing the 'Moving Window' paradigm to restrict peripheral vision. This eliminates the chaotic saccadic eye movements responsible for 'F-Pattern' skimming, forcing the fovea to process information linearly and increasing deep comprehension.",
+                "featureHook": "Prevents skimming by physically limiting the visual field."
+            },
+            "vocalGym": {
+                "title": "The Production Effect (Vocal Gym)",
+                "content": "The act of articulating text aloud creates a distinctive memory trace. This 'dual-coding' process synchronizes motor and auditory pathways, effectively overriding the Default Mode Network (DMN) associated with mind-wandering and racing thoughts.",
+                "featureHook": "Engages motor pathways to override internal racing thoughts."
+            },
+            "zenType": {
+                "title": "Cognitive Inhibition (Zen Type)",
+                "content": "Removing the backspace safety net shifts cognitive control from 'reactive' correction to 'proactive' precision. This enforces Deliberate Practice, strengthening the prefrontal cortex's executive function to inhibit impulsive motor responses.",
+                "featureHook": "Forces deliberate practice by removing error correction."
+            }
+        }
     }
 }

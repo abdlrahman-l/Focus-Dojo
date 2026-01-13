@@ -3,8 +3,9 @@ import { Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { router } from '@/main';
 
-export const Route = createFileRoute('/language')({
+export const Route = createFileRoute('/init')({
     component: LanguageSelection,
 });
 
@@ -78,7 +79,7 @@ function LanguageSelection() {
             <div className="fixed bottom-8 w-full max-w-md px-4">
                 <Button
                     className="w-full bg-primary py-6 text-base font-bold tracking-widest text-white hover:bg-[#059669]"
-                    onClick={() => console.log('Protocol Initialized')}
+                    onClick={() => router.navigate({ to: '/' })}
                 >
                     {t('initializeProtocol')}
                 </Button>

@@ -1,23 +1,61 @@
 {
-    "selectLanguage": "Pilih bahasa latihan Anda:",
-    "initializeProtocol": "INISIALISASI PROTOKOL",
+    "selectLanguage": "Pilih bahasa latihan:",
+    "initializeProtocol": "AKTIFKAN PROTOKOL",
     "indonesian": "Bahasa Indonesia",
     "english": "Bahasa Inggris",
     "title": "FOCUS DOJO",
     "dashboard": {
-        "welcomeBack": "Selamat datang kembali, {{name}}",
-        "recoveryScore": "SKOR PEMULIHAN",
+        "welcomeBack": "Halo, {{name}}.",
+        "recoveryScore": "RECOVERY SCORE",
         "focusReader": {
-            "title": "BACA FOKUS",
-            "description": "LATIHAN MEMBACA MENDALAM"
+            "title": "FOCUS READER",
+            "description": "LATIHAN DEEP READING"
         },
         "vocalGym": {
-            "title": "GYM VOKAL",
+            "title": "VOCAL GYM",
             "description": "LATIHAN ARTIKULASI"
         },
         "zenType": {
-            "title": "KETIK ZEN",
-            "description": "KESABARAN & AKURASI"
+            "title": "ZEN TYPE",
+            "description": "KESABARAN & PRESISI"
+        }
+    },
+    "vocalGymFeature": {
+        "articulationDrill": "LATIHAN ARTIKULASI",
+        "readAloud": "BACA BERSUARA",
+        "listening": "Mendengarkan...",
+        "speakClearly": "Ucapkan dengan jelas dan pelan.",
+        "pressMic": "Tap mic untuk mulai",
+        "phrase": "Ular melingkar-lingkar di pagar pak Umar.",
+        "changeSentence": "Ganti Soal",
+        "drills": [
+            "Ular melingkar-lingkar di pagar pak Umar.",
+            "Kuku kaki kakak kakekku kaku-kaku.",
+            "Dudung, ambilkan dandang di dinding dong, Dung.",
+            "Kelapa diparut, kepala digaruk.",
+            "Satu ribu, dua biru, tiga ribu, empat biru."
+        ]
+    },
+    "scienceModal": {
+        "title": "BASIS RISET",
+        "validatedBy": "Validasi Neurosains",
+        "close": "Tutup",
+        "features": {
+            "focusReader": {
+                "title": "Visual Gating (Focus Reader)",
+                "content": "Menggunakan metode 'Moving Window' untuk membatasi penglihatan samping. Ini menghilangkan gerakan mata loncat-loncat (sakadik) saat skimming, memaksa otak memproses info secara linear dan paham lebih dalam.",
+                "featureHook": "Cegah skimming dengan membatasi pandangan secara fisik."
+            },
+            "vocalGym": {
+                "title": "The Production Effect (Vocal Gym)",
+                "content": "Membaca bersuara menciptakan jejak memori yang kuat. Proses 'dual-coding' ini menyinkronkan mulut dan pendengaran, efektif untuk 'menimpa' suara pikiran yang berisik (overthinking).",
+                "featureHook": "Aktifkan motorik untuk meredam pikiran yang melantur."
+            },
+            "zenType": {
+                "title": "Cognitive Inhibition (Zen Type)",
+                "content": "Tanpa tombol backspace, otak dipaksa pindah dari mode 'asal ketik' ke mode 'sadar penuh'. Ini melatih Prefrontal Cortex untuk menahan impuls dan lebih teliti sebelum bertindak.",
+                "featureHook": "Paksa fokus penuh dengan mematikan fitur koreksi."
+            }
         }
     }
 }

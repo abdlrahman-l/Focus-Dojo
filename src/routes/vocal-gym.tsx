@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { ArticulationDrill } from '@/features/vocal-gym/components/articulation-drill'
 
 export const Route = createFileRoute('/vocal-gym')({
-  component: () => <div className="p-4 text-white">Vocal Gym Feature</div>,
+  component: ArticulationDrill,
 })
