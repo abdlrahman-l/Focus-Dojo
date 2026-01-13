@@ -6,6 +6,7 @@ import { ScienceModal } from '@/components/ScienceModal'
 import { CircularProgress } from '@/components/ui/circular-progress'
 import { LanguageSelector } from '@/features/components/language-selector'
 import { useTranslation } from 'react-i18next'
+import { useScoreStore } from '@/stores/score-store'
 
 export const Route = createFileRoute('/')({
   component: Dashboard,
@@ -15,11 +16,13 @@ export const Route = createFileRoute('/')({
 function Dashboard() {
   const { t } = useTranslation();
   const [isScienceModalOpen, setIsScienceModalOpen] = useState(false)
+
+  const { getRecoveryScore } = useScoreStore()
   
   // Mock data for the dashboard
   const user = {
     name: "Initiate",
-    recoveryScore: 68
+    recoveryScore: getRecoveryScore()
   }
 
   const features = [
@@ -57,11 +60,11 @@ function Dashboard() {
       </header>
 
       {/* 2. Hero Section - Recovery Score */}
-      <section className="flex flex-1 flex-col items-center justify-center py-12">
+      <section className="flex flex-1 flex-col items-center justify-center">
         <CircularProgress 
           value={user.recoveryScore} 
           label={t('dashboard.recoveryScore')}
-          size={256}
+          size={230}
         />
       </section>
 
@@ -71,11 +74,11 @@ function Dashboard() {
           <Link
             key={feature.id}
             to={feature.path}
-            className="group flex w-full items-center rounded-3xl bg-zinc-900 p-5 transition-transform hover:scale-[1.02] active:scale-[0.98]"
+            className="group flex w-full items-center rounded-2xl bg-zinc-900 p-4 transition-transform hover:scale-[1.02] active:scale-[0.98]"
           >
             {/* Icon Container */}
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-800/50 text-white group-hover:text-emerald-500 transition-colors">
-              <feature.icon className="h-6 w-6" strokeWidth={1.5} />
+            <div className="flex size-10 items-center justify-center rounded-full bg-zinc-800/50 text-white group-hover:text-emerald-500 transition-colors">
+              <feature.icon className="size-6 strokeWidth={1.5}" />
             </div>
             
             {/* Text Content */}

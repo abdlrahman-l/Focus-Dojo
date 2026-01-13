@@ -80,7 +80,7 @@ export function CircularProgress({
       
       {/* Center Text */}
       <div className="absolute flex flex-col items-center justify-center text-center">
-        <span className={cn("text-7xl font-bold tracking-tighter text-white", valueClassName)}>
+        <span className={cn("text-6xl font-bold tracking-tighter text-white", valueClassName)}>
           {Math.round(normalizedProgress)}%
         </span>
         {label && (
