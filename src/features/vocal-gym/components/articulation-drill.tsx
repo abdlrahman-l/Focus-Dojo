@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, Mic, RefreshCcw } from 'lucide-react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { useTranslation } from 'react-i18next'
 import { LanguageSelector } from '@/features/components/language-selector'
@@ -52,6 +52,12 @@ declare global {
   }
 }
 
+const filterDrill = (drill: string) => drill
+  .toLowerCase()
+  .replace(/[^\w\s-]/g, '')
+  .split(/\s+/)
+  .filter(Boolean)
+
 export function ArticulationDrill() {
   const { t, i18n } = useTranslation()
   const [isListening, setIsListening] = useState(false)
@@ -60,16 +66,34 @@ export function ArticulationDrill() {
   const [visualizerBars, setVisualizerBars] = useState<number[]>([])
   const recognitionRef = useRef<SpeechRecognition | null>(null)
 
-  const drills = t('vocalGymFeature.drills', { returnObjects: true }) as string[]
-  const currentPhrase = Array.isArray(drills) && drills[currentDrillIndex] ? drills[currentDrillIndex] : t('vocalGymFeature.phrase')
+  const drills = useMemo(() => t('vocalGymFeature.drills', { returnObjects: true }) as string[], [t])
+  const currentPhrase = useMemo(() => {
+    return Array.isArray(drills) && drills[currentDrillIndex] ? drills[currentDrillIndex] : t('vocalGymFeature.phrase')
+  }, [drills, currentDrillIndex, t])
 
-  const handleRandomSentence = () => {
+  const handleRandomSentence = useCallback(() => {
     if (Array.isArray(drills) && drills.length > 0) {
       const randomIndex = Math.floor(Math.random() * drills.length)
       setCurrentDrillIndex(randomIndex)
       setTranscript("") // Clear transcript on new sentence
     }
-  }
+  }, [drills])
+
+  const currentDrillFiltered = useMemo(() => 
+    filterDrill(currentPhrase)
+  ,[currentPhrase])
+
+  const transcriptContent = useMemo(() => 
+    <p>
+      {
+        filterDrill(transcript).map((word, index) => {
+          const isCorrect = currentDrillFiltered[index] === word
+          return <span className={cn(isCorrect ? 'text-primary' : 'text-red-500')} key={index}>{word} </span>
+        })
+      }
+    </p>
+  ,[transcript, currentDrillFiltered])
+
 
   // Initialize visualizer bars
   useEffect(() => {
@@ -93,11 +117,10 @@ export function ArticulationDrill() {
       recognition.lang = langMap[i18n.language] || 'en-US'
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
-        let currentTranscript = ''
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          currentTranscript += event.results[i][0].transcript
-        }
-        setTranscript(currentTranscript)
+        const finalTranscript = Array.from(event.results)
+          .map(result => result[0].transcript)
+          .join('')
+        setTranscript(finalTranscript)
       }
 
       recognition.onend = () => {
@@ -116,7 +139,7 @@ export function ArticulationDrill() {
 
 
 
-  const toggleListening = () => {
+  const toggleListening = useCallback(() => {
     if (!recognitionRef.current) return
 
     if (isListening) {
@@ -127,7 +150,7 @@ export function ArticulationDrill() {
       recognitionRef.current.start()
       setIsListening(true)
     }
-  }
+  }, [isListening])
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center bg-black p-6 text-foreground font-sans">
@@ -183,8 +206,9 @@ export function ArticulationDrill() {
       </div>
 
       {/* 4. Live Transcript */}
-      <div className="mb-auto mt-4 min-h-7 text-center font-mono text-lg tracking-wide text-primary">
-        {transcript || (isListening ? <span className="animate-pulse">{t('vocalGymFeature.listening')}</span> : t('vocalGymFeature.pressMic'))}
+      <div className="mb-auto mt-4 min-h-7 text-center font-mono text-lg tracking-wide">
+        {!transcript && (isListening ? <span className="animate-pulse">{t('vocalGymFeature.listening')}</span> : t('vocalGymFeature.pressMic'))}
+        {transcript && transcriptContent}
         {isListening && transcript && <span className="animate-pulse">_</span>}
       </div>
 
