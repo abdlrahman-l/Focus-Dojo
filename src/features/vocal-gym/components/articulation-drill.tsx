@@ -166,7 +166,6 @@ export function ArticulationDrill() {
       <Drawer open={score !== null} onOpenChange={(open) => !open && setScore(null)}>
         <DrawerContent className="bg-zinc-950 border-zinc-900 border-t-0 ring-0 outline-none text-white">
           <DrawerHeader className="text-center pt-8 pb-4">
-             <div className="w-12 h-1 bg-zinc-800 rounded-full mx-auto mb-6" />
              <DrawerTitle className="text-6xl font-bold text-emerald-400 mb-2 font-mono tracking-tighter drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">
                {score}%
              </DrawerTitle>
