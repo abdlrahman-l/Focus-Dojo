@@ -34,7 +34,13 @@
             "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
             "Fuzzy Wuzzy was a bear, Fuzzy Wuzzy had no hair.",
             "I scream, you scream, we all scream for ice cream."
-        ]
+        ],
+        "precisionAcquired": "PRECISION ACQUIRED",
+        "transcriptAnalysis": "TRANSCRIPT ANALYSIS",
+        "target": "TARGET",
+        "input": "INPUT",
+        "retryOper": "RETRY",
+        "nextProtocol": "NEXT"
     },
     "scienceModal": {
         "title": "RESEARCH DATA",

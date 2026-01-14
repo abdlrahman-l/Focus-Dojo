@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowLeft, Mic, RefreshCcw, ArrowRight, RotateCcw, AudioLines, Divide } from 'lucide-react'
+import { ArrowLeft, Mic, RefreshCcw, ArrowRight, RotateCcw, AudioLines } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn, filterDrill } from '@/lib/utils'
 import { LanguageSelector } from '@/features/components/language-selector'
@@ -171,7 +171,7 @@ export function ArticulationDrill() {
                {score}%
              </DrawerTitle>
              <p className="text-emerald-500/80 text-xs font-bold tracking-[0.2em] uppercase">
-               Precision Acquired
+               {t('vocalGymFeature.precisionAcquired')}
              </p>
           </DrawerHeader>
 
@@ -179,17 +179,17 @@ export function ArticulationDrill() {
              <div className="bg-zinc-900/50 rounded-2xl p-6 border border-zinc-800">
                 <div className="flex items-center gap-3">
                    <AudioLines className='size-4 text-primary' />
-                   <h3 className="text-xs text-zinc-500 tracking-widest uppercase">Transcript Analysis</h3>
+                   <h3 className="text-xs text-zinc-500 tracking-widest uppercase">{t('vocalGymFeature.transcriptAnalysis')}</h3>
                 </div>
                 <Separator className='my-4 bg-gray-800' />
 
                 <div className="mb-6">
-                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">Target</h4>
+                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">{t('vocalGymFeature.target')}</h4>
                    <p className="font-serif text-xl text-zinc-300 italic">"{currentPhrase}"</p>
                 </div>
 
                 <div>
-                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">Input</h4>
+                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">{t('vocalGymFeature.input')}</h4>
                    <div className="font-mono text-sm leading-relaxed">
                       <TranscriptHighlighter
                         transcript={transcript}
@@ -209,13 +209,13 @@ export function ArticulationDrill() {
                className="group flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-transparent py-4 text-xs font-bold tracking-widest text-zinc-300 uppercase transition-all hover:bg-zinc-900 active:scale-95"
              >
                <RotateCcw className="h-4 w-4 transition-transform group-hover:-rotate-90" />
-               Retry Oper
+               {t('vocalGymFeature.retryOper')}
              </button>
              <button
                onClick={handleRandomSentence}
                className="group flex items-center justify-center gap-2 rounded-full bg-emerald-400 py-4 text-xs font-bold tracking-widest text-emerald-950 uppercase transition-all hover:bg-emerald-300 active:scale-95 shadow-[0_0_20px_-5px_var(--color-emerald-500)]"
              >
-               Next Protocol
+               {t('vocalGymFeature.nextProtocol')}
                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
              </button>
           </DrawerFooter>

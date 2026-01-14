@@ -34,7 +34,13 @@
             "Dudung, ambilkan dandang di dinding dong, Dung.",
             "Kelapa diparut, kepala digaruk.",
             "Satu ribu, dua biru, tiga ribu, empat biru."
-        ]
+        ],
+        "precisionAcquired": "PRESISI TERCAPAI",
+        "transcriptAnalysis": "ANALISIS TRANSKRIP",
+        "target": "TARGET",
+        "input": "INPUT",
+        "retryOper": "ULANG",
+        "nextProtocol": "LANJUT"
     },
     "scienceModal": {
         "title": "BASIS RISET",
