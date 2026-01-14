@@ -1,204 +1,65 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Link } from '@tanstack/react-router'
-import { ArrowLeft, Mic, RefreshCcw } from 'lucide-react'
+import { ArrowLeft, Mic, RefreshCcw, ArrowRight, RotateCcw, AudioLines, Divide } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { cn } from '@/lib/utils'
+import { cn, filterDrill } from '@/lib/utils'
 import { LanguageSelector } from '@/features/components/language-selector'
+import { useArticulationDrill } from '@/features/vocal-gym/hooks/use-articulation-drill'
 
-import { useScoreStore } from '@/stores/score-store'
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerFooter,
+} from '@/components/ui/drawer'
+import { Separator } from '@/components/ui/separator'
 
-// Add type definitions for Web Speech API
-interface SpeechRecognitionEvent extends Event {
-  results: SpeechRecognitionResultList
-  resultIndex: number
-}
-
-interface SpeechRecognitionResultList {
-  length: number
-  item(index: number): SpeechRecognitionResult
-  [index: number]: SpeechRecognitionResult
-}
-
-interface SpeechRecognitionResult {
-  isFinal: boolean
-  length: number
-  item(index: number): SpeechRecognitionAlternative
-  [index: number]: SpeechRecognitionAlternative
-}
-
-interface SpeechRecognitionAlternative {
+interface TranscriptHighlighterProps {
   transcript: string
-  confidence: number
+  targetDrill: string[]
+  correctClass: string
+  incorrectClass: string
 }
 
-interface SpeechRecognition extends EventTarget {
-  continuous: boolean
-  interimResults: boolean
-  lang: string
-  start(): void
-  stop(): void
-  abort(): void
-  onresult:
-    | ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => void)
-    | null
-  onend: ((this: SpeechRecognition, ev: Event) => void) | null
-  onerror: ((this: SpeechRecognition, ev: Event) => void) | null
+const TranscriptHighlighter = ({
+  transcript,
+  targetDrill,
+  correctClass,
+  incorrectClass,
+}: TranscriptHighlighterProps) => {
+  return (
+    <>
+      {filterDrill(transcript).map((word, index) => {
+        const targetWord = targetDrill[index]
+        const isCorrect = targetWord === word
+        return (
+          <span
+            className={cn(isCorrect ? correctClass : incorrectClass)}
+            key={index}
+          >
+            {word}{' '}
+          </span>
+        )
+      })}
+    </>
+  )
 }
-
-declare global {
-  interface Window {
-    SpeechRecognition: {
-      new (): SpeechRecognition
-    }
-    webkitSpeechRecognition: {
-      new (): SpeechRecognition
-    }
-  }
-}
-
-const filterDrill = (drill: string) =>
-  drill
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .split(/\s+/)
-    .filter(Boolean)
 
 export function ArticulationDrill() {
-  const { t, i18n } = useTranslation()
-  const [isListening, setIsListening] = useState(false)
-  const [transcript, setTranscript] = useState('')
-  const [currentDrillIndex, setCurrentDrillIndex] = useState(0)
-  const [visualizerBars, setVisualizerBars] = useState<number[]>([])
-  const [score, setScore] = useState<number | null>(null)
-  const recognitionRef = useRef<SpeechRecognition | null>(null)
-  const silenceTimerRef = useRef<NodeJS.Timeout | null>(null)
-
-  const { addAttempt, checkDailyReset } = useScoreStore()
-
-  const drills = useMemo(
-    () => t('vocalGymFeature.drills', { returnObjects: true }) as string[],
-    [t]
-  )
-  const currentPhrase = useMemo(() => {
-    return Array.isArray(drills) && drills[currentDrillIndex]
-      ? drills[currentDrillIndex]
-      : t('vocalGymFeature.phrase')
-  }, [drills, currentDrillIndex, t])
-
-  const handleRandomSentence = useCallback(() => {
-    if (Array.isArray(drills) && drills.length > 0) {
-      const randomIndex = Math.floor(Math.random() * drills.length)
-      setCurrentDrillIndex(randomIndex)
-      setTranscript('') // Clear transcript on new sentence
-      setScore(null) // Reset score
-    }
-  }, [drills])
-
-  const currentDrillFiltered = useMemo(
-    () => filterDrill(currentPhrase),
-    [currentPhrase]
-  )
-
-  // Initialize visualizer bars
-  useEffect(() => {
-    const bars = Array.from(
-      { length: 20 },
-      () => Math.floor(Math.random() * 40) + 10
-    )
-    setVisualizerBars(bars)
-    checkDailyReset()
-  }, [checkDailyReset])
-
-  useEffect(() => {
-    // Initialize Speech Recognition
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition()
-      recognition.continuous = true
-      recognition.interimResults = true
-
-      // Initial language setup
-      const langMap: Record<string, string> = {
-        en: 'en-US',
-        id: 'id-ID',
-      }
-      recognition.lang = langMap[i18n.language] || 'en-US'
-
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
-        // Reset silence timer on every result (voice detected)
-        if (silenceTimerRef.current) {
-          clearTimeout(silenceTimerRef.current)
-        }
-
-        const finalTranscript = Array.from(event.results)
-          .map((result) => result[0].transcript)
-          .join('')
-        setTranscript(finalTranscript)
-
-        // Set new timer: if no voice for 1.5s, stop listening
-        silenceTimerRef.current = setTimeout(() => {
-          recognition.stop()
-          setIsListening(false)
-        }, 1500)
-      }
-
-      recognition.onend = () => {
-        setIsListening(false)
-        if (silenceTimerRef.current) {
-          clearTimeout(silenceTimerRef.current)
-        }
-      }
-
-      recognitionRef.current = recognition
-    }
-
-    return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop()
-      }
-      if (silenceTimerRef.current) {
-        clearTimeout(silenceTimerRef.current)
-      }
-    }
-  }, [i18n.language])
-
-  // Cleanup effect
-  useEffect(() => {
-    return () => {
-       if (silenceTimerRef.current) {
-        clearTimeout(silenceTimerRef.current)
-       }
-    }
-  }, [])
-
-  // Calculate score when listening stops
-  useEffect(() => {
-    if (!isListening && transcript) {
-      import('@/lib/scoring').then(({ calculateWordMatchScore }) => {
-        const calculatedScore = calculateWordMatchScore(currentPhrase, transcript)
-        setScore(calculatedScore)
-        addAttempt('vocalGym', calculatedScore)
-      })
-    }
-  }, [isListening, transcript, currentPhrase, addAttempt])
-
-  const toggleListening = useCallback(() => {
-    if (!recognitionRef.current) return
-
-    if (isListening) {
-      recognitionRef.current.stop()
-      setIsListening(false)
-      if (silenceTimerRef.current) {
-        clearTimeout(silenceTimerRef.current)
-      }
-    } else {
-      setTranscript('') // Clear previous transcript
-      setScore(null) // Reset score
-      recognitionRef.current.start()
-      setIsListening(true)
-    }
-  }, [isListening])
+  const { t } = useTranslation()
+  
+  const {
+    isListening,
+    transcript,
+    toggleListening,
+    score,
+    setScore,
+    currentPhrase,
+    currentDrillFiltered,
+    visualizerBars,
+    handleRandomSentence,
+    handleRetry
+  } = useArticulationDrill()
 
   return (
     <div className='text-foreground flex min-h-screen w-full flex-col items-center bg-black p-6 font-sans'>
@@ -220,13 +81,6 @@ export function ArticulationDrill() {
 
       {/* 2. Prompt Card */}
       <div className='flex aspect-square w-full max-w-sm flex-col items-center justify-center rounded-4xl bg-neutral-800 p-8 text-center relative overflow-hidden'>
-         {/* Score Overlay */}
-        {score !== null && (
-          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/10 animate-in fade-in zoom-in duration-300">
-            Score: {score}%
-          </div>
-        )}
-
         <span className='text-primary mb-6 text-xs font-bold tracking-widest'>
           {t('vocalGymFeature.readAloud')}
         </span>
@@ -272,21 +126,12 @@ export function ArticulationDrill() {
           ))}
         {transcript && (
           <p>
-            {filterDrill(transcript).map((word, index) => {
-              const targetWord = currentDrillFiltered[index];
-              // Simple check: green if matches target at that position, red otherwise
-              // Note: This simple index matching might fail if user skips words.
-              // For better highlighting we might need diffing logic, but simple match is ok for now.
-              const isCorrect = targetWord === word
-              return (
-                <span
-                  className={cn('font-serif', isCorrect ? 'text-primary' : 'text-red-500')}
-                  key={index}
-                >
-                  {word}{' '}
-                </span>
-              )
-            })}
+            <TranscriptHighlighter
+              transcript={transcript}
+              targetDrill={currentDrillFiltered}
+              correctClass="font-serif text-primary"
+              incorrectClass="font-serif text-red-500"
+            />
           </p>
         )}
         {isListening && transcript && <span className='animate-pulse'>_</span>}
@@ -316,6 +161,66 @@ export function ArticulationDrill() {
             : t('vocalGymFeature.speakClearly')}
         </span>
       </div>
+
+      {/* Score Drawer */}
+      <Drawer open={score !== null} onOpenChange={(open) => !open && setScore(null)}>
+        <DrawerContent className="bg-zinc-950 border-zinc-900 border-t-0 ring-0 outline-none text-white">
+          <DrawerHeader className="text-center pt-8 pb-4">
+             <div className="w-12 h-1 bg-zinc-800 rounded-full mx-auto mb-6" />
+             <DrawerTitle className="text-6xl font-bold text-emerald-400 mb-2 font-mono tracking-tighter drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">
+               {score}%
+             </DrawerTitle>
+             <p className="text-emerald-500/80 text-xs font-bold tracking-[0.2em] uppercase">
+               Precision Acquired
+             </p>
+          </DrawerHeader>
+
+          <div className="px-6 py-4 flex flex-col gap-6">
+             <div className="bg-zinc-900/50 rounded-2xl p-6 border border-zinc-800">
+                <div className="flex items-center gap-3">
+                   <AudioLines className='size-4 text-primary' />
+                   <h3 className="text-xs text-zinc-500 tracking-widest uppercase">Transcript Analysis</h3>
+                </div>
+                <Separator className='my-4 bg-gray-800' />
+
+                <div className="mb-6">
+                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">Target</h4>
+                   <p className="font-serif text-xl text-zinc-300 italic">"{currentPhrase}"</p>
+                </div>
+
+                <div>
+                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">Input</h4>
+                   <div className="font-mono text-sm leading-relaxed">
+                      <TranscriptHighlighter
+                        transcript={transcript}
+                        targetDrill={currentDrillFiltered}
+                        correctClass="text-yellow-400"
+                        incorrectClass="font-mono text-yellow-400 underline decoration-red-500 decoration-wavy underline-offset-4"
+                      />
+                   </div>
+                </div>
+             </div>
+          </div>
+
+
+          <DrawerFooter className="px-6 pb-8 pt-2 grid grid-cols-2 gap-4">
+             <button
+               onClick={handleRetry}
+               className="group flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-transparent py-4 text-xs font-bold tracking-widest text-zinc-300 uppercase transition-all hover:bg-zinc-900 active:scale-95"
+             >
+               <RotateCcw className="h-4 w-4 transition-transform group-hover:-rotate-90" />
+               Retry Oper
+             </button>
+             <button
+               onClick={handleRandomSentence}
+               className="group flex items-center justify-center gap-2 rounded-full bg-emerald-400 py-4 text-xs font-bold tracking-widest text-emerald-950 uppercase transition-all hover:bg-emerald-300 active:scale-95 shadow-[0_0_20px_-5px_var(--color-emerald-500)]"
+             >
+               Next Protocol
+               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+             </button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </div>
   )
 }

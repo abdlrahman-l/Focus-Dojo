@@ -58,3 +58,10 @@ export function getPageNumbers(currentPage: number, totalPages: number) {
 
   return rangeWithDots
 }
+
+export const filterDrill = (drill: string) =>
+  drill
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .split(/\s+/)
+    .filter(Boolean)
