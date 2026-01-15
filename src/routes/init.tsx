@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { router } from '@/main';
+import { useScoreStore } from '@/stores/score-store';
 
 export const Route = createFileRoute('/init')({
     component: LanguageSelection,
@@ -11,6 +12,7 @@ export const Route = createFileRoute('/init')({
 
 function LanguageSelection() {
     const { t, i18n } = useTranslation();
+    const { setInitialAttempt } = useScoreStore()
 
     const changeLanguage = (lng: string) => {
         i18n.changeLanguage(lng);
@@ -79,7 +81,10 @@ function LanguageSelection() {
             <div className="fixed bottom-8 w-full max-w-md px-4">
                 <Button
                     className="w-full bg-primary py-6 text-base font-bold tracking-widest text-white hover:bg-[#059669]"
-                    onClick={() => router.navigate({ to: '/' })}
+                    onClick={() => {
+                        setInitialAttempt(true)   
+                        router.navigate({ to: '/' })     
+                    }}
                 >
                     {t('initializeProtocol')}
                 </Button>

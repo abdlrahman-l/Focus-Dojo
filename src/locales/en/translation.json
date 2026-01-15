@@ -1,6 +1,6 @@
 {
     "selectLanguage": "Select your training language:",
-    "initializeProtocol": "INITIALIZE PROTOCOL",
+    "initializeProtocol": "START",
     "indonesian": "Bahasa Indonesia",
     "english": "English",
     "title": "FOCUS DOJO",
@@ -33,7 +33,15 @@
             "Peter Piper picked a peck of pickled peppers.",
             "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
             "Fuzzy Wuzzy was a bear, Fuzzy Wuzzy had no hair.",
-            "I scream, you scream, we all scream for ice cream."
+            "I scream, you scream, we all scream for ice cream.",
+            "Betty Botter bought some butter but she said the butter's bitter.",
+            "How can a clam cram in a clean cream can?",
+            "I saw Susie sitting in a shoeshine shop.",
+            "Can you can a can as a canner can can a can?",
+            "The thirty-three thieves thought that they thrilled the throne throughout Thursday.",
+            "Six slippery snails slid slowly seaward.",
+            "A proper copper coffee pot.",
+            "Lesser leather never weathered wetter weather better."
         ],
         "precisionAcquired": "PRECISION ACQUIRED",
         "transcriptAnalysis": "TRANSCRIPT ANALYSIS",

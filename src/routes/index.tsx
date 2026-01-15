@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { AudioLines, Eye, Keyboard, Settings, Info } from 'lucide-react'
+import { AudioLines, Eye, Keyboard, Info } from 'lucide-react'
 import { useState } from 'react'
 import { ScienceModal } from '@/components/ScienceModal'
 
@@ -104,13 +104,13 @@ function Dashboard() {
           <Info className="h-6 w-6" />
         </button>
 
-        <Link 
+        {/* <Link 
           to="/settings" 
           className="rounded-full p-2 text-zinc-600 transition-colors hover:bg-zinc-900 hover:text-white"
           aria-label="Settings"
         >
           <Settings className="h-6 w-6" />
-        </Link>
+        </Link> */}
       </footer>
 
       <ScienceModal 

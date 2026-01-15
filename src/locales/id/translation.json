@@ -1,6 +1,6 @@
 {
     "selectLanguage": "Pilih bahasa latihan:",
-    "initializeProtocol": "AKTIFKAN PROTOKOL",
+    "initializeProtocol": "MULAI",
     "indonesian": "Bahasa Indonesia",
     "english": "Bahasa Inggris",
     "title": "FOCUS DOJO",
@@ -34,11 +34,18 @@
             "Dudung, ambilkan dandang di dinding dong, Dung.",
             "Kelapa diparut, kepala digaruk.",
             "Satu ribu, dua biru, tiga ribu, empat biru.",
-            "Kucing kuningku kencing di kunci-kunciku.",
+            "Kucing kuningku kencing dikunci-kunciku.",
             "Buaya biawak buai bayi buaya.",
             "Tokek makan tongkol, tongkol dimakan tokek.",
             "Rika lari-lari di lorong-lorong.",
-            "Saya suka sate sapi surabaya."
+            "Saya suka sate sapi surabaya.",
+            "Kutuku butuh tubuhku, tapi tubuhku tak butuh kutuku.",
+            "Bebek bekal bapak babak belur dibakar besok.",
+            "Bolak balik belok balok.",
+            "Siapa sih yang sibuk sikat gigi si Sisi?",
+            "Keledai makan kedelai di kedai.",
+            "Kakak kok kukur-kukur kuku kaki kakak?",
+            "Cengkir kencur cengkeh kencur."
         ],
         "precisionAcquired": "PRESISI TERCAPAI",
         "transcriptAnalysis": "ANALISIS TRANSKRIP",

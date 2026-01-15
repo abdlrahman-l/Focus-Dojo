@@ -13,12 +13,14 @@ interface ScoreState {
     zenType: number[]
   }
   lastActiveDate: string
+  initialAttempt: boolean
 }
 
 interface ScoreActions {
   addAttempt: (feature: 'focusReader' | 'vocalGym' | 'zenType', score: number) => void
   checkDailyReset: () => void
   getRecoveryScore: () => number
+  setInitialAttempt: (value: boolean) => void
 }
 
 type ScoreStore = ScoreState & ScoreActions
@@ -35,6 +37,7 @@ const INITIAL_STATE: ScoreState = {
     zenType: [],
   },
   lastActiveDate: new Date().toISOString().split('T')[0],
+  initialAttempt: false,
 }
 
 export const useScoreStore = create<ScoreStore>()(
@@ -96,6 +99,9 @@ export const useScoreStore = create<ScoreStore>()(
           scores.zenType * 0.3
         
         return Math.round(weightedScore)
+      },
+      setInitialAttempt: (value: boolean) => {
+        set({ initialAttempt: value })
       },
     }),
     {
