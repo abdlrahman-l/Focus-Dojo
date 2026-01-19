@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { ZenType } from '@/features/zen-type/components/zen-type'
 
 export const Route = createFileRoute('/zen-type')({
-  component: () => <div className="p-4 text-white">Zen Type Feature</div>,
+  component: ZenType,
 })

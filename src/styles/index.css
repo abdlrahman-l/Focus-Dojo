@@ -5,15 +5,47 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-
   /* UI Utama -> Inter */
-  --font-sans: "Inter", "ui-sans-serif", "system-ui", "sans-serif";
-  
+  --font-sans: 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif';
+
   /* Mode Baca -> Merriweather */
-  --font-serif: "Merriweather", "Georgia", "serif";
-  
+  --font-serif: 'Merriweather', 'Georgia', 'serif';
+
   /* Data/Coding -> JetBrains Mono */
-  --font-mono: "JetBrains Mono", "ui-monospace", "monospace";
+  --font-mono: 'JetBrains Mono', 'ui-monospace', 'monospace';
+
+  --animate-shake: shake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-blink: blink 1s step-end infinite;
+
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-4px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(4px);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {
@@ -45,7 +77,6 @@
 
   /* Prevent focus zoom on mobile devices */
   @media screen and (max-width: 767px) {
-
     input,
     select,
     textarea {
@@ -60,7 +91,6 @@
 }
 
 @utility no-scrollbar {
-
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;
@@ -79,7 +109,7 @@
   }
 
   .faded-bottom::after {
-    content: "";
+    content: '';
     @apply pointer-events-none absolute start-0 bottom-0 hidden h-32 w-full rounded-b-2xl md:block;
     background: linear-gradient(180deg, transparent 10%, var(--background) 70%);
   }

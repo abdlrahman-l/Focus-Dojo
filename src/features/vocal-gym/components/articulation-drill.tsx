@@ -1,18 +1,11 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowLeft, Mic, RefreshCcw, ArrowRight, RotateCcw, AudioLines } from 'lucide-react'
+import { ArrowLeft, Mic, RefreshCcw, AudioLines } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn, filterDrill } from '@/lib/utils'
+import { Separator } from '@/components/ui/separator'
+import { ScoreDrawer } from '@/components/score-drawer'
 import { LanguageSelector } from '@/features/components/language-selector'
 import { useArticulationDrill } from '@/features/vocal-gym/hooks/use-articulation-drill'
-
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerFooter,
-} from '@/components/ui/drawer'
-import { Separator } from '@/components/ui/separator'
 
 interface TranscriptHighlighterProps {
   transcript: string
@@ -47,7 +40,7 @@ const TranscriptHighlighter = ({
 
 export function ArticulationDrill() {
   const { t } = useTranslation()
-  
+
   const {
     isListening,
     transcript,
@@ -58,7 +51,7 @@ export function ArticulationDrill() {
     currentDrillFiltered,
     visualizerBars,
     handleRandomSentence,
-    handleRetry
+    handleRetry,
   } = useArticulationDrill()
 
   return (
@@ -78,9 +71,8 @@ export function ArticulationDrill() {
           <LanguageSelector />
         </div>
       </header>
-
       {/* 2. Prompt Card */}
-      <div className='flex aspect-square w-full max-w-sm flex-col items-center justify-center rounded-4xl bg-neutral-800 p-8 text-center relative overflow-hidden'>
+      <div className='relative flex aspect-square w-full max-w-sm flex-col items-center justify-center overflow-hidden rounded-4xl bg-neutral-800 p-8 text-center'>
         <span className='text-primary mb-6 text-xs font-bold tracking-widest'>
           {t('vocalGymFeature.readAloud')}
         </span>
@@ -96,7 +88,6 @@ export function ArticulationDrill() {
           {t('vocalGymFeature.changeSentence')}
         </button>
       </div>
-
       {/* 3. Audio Visualizer (Mock - Simulated) */}
       <div className='mt-12 flex h-16 items-center justify-center gap-1'>
         {visualizerBars.map((height, index) => (
@@ -113,7 +104,6 @@ export function ArticulationDrill() {
           />
         ))}
       </div>
-
       {/* 4. Live Transcript */}
       <div className='mt-4 mb-auto min-h-7 text-center font-mono text-lg tracking-wide'>
         {!transcript &&
@@ -129,14 +119,13 @@ export function ArticulationDrill() {
             <TranscriptHighlighter
               transcript={transcript}
               targetDrill={currentDrillFiltered}
-              correctClass="font-serif text-primary"
-              incorrectClass="font-serif text-red-500"
+              correctClass='font-serif text-primary'
+              incorrectClass='font-serif text-red-500'
             />
           </p>
         )}
         {isListening && transcript && <span className='animate-pulse'>_</span>}
       </div>
-
       {/* 5. Microphone Trigger */}
       <div className='mt-8 flex flex-col items-center pb-8'>
         <button
@@ -161,65 +150,55 @@ export function ArticulationDrill() {
             : t('vocalGymFeature.speakClearly')}
         </span>
       </div>
-
       {/* Score Drawer */}
-      <Drawer open={score !== null} onOpenChange={(open) => !open && setScore(null)}>
-        <DrawerContent className="bg-zinc-950 border-zinc-900 border-t-0 ring-0 outline-none text-white">
-          <DrawerHeader className="text-center pt-8 pb-4">
-             <DrawerTitle className="text-6xl font-bold text-emerald-400 mb-2 font-mono tracking-tighter drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]">
-               {score}%
-             </DrawerTitle>
-             <p className="text-emerald-500/80 text-xs font-bold tracking-[0.2em] uppercase">
-               {t('vocalGymFeature.precisionAcquired')}
-             </p>
-          </DrawerHeader>
+      <ScoreDrawer
+        open={score !== null}
+        onOpenChange={(open) => !open && setScore(null)}
+        score={score}
+        title={t('vocalGymFeature.precisionAcquired')}
+        onRetry={handleRetry}
+        onNext={handleRandomSentence}
+        retryLabel={t('vocalGymFeature.retryOper')}
+        nextLabel={t('vocalGymFeature.nextProtocol')}
+        scoreClassName='text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]'
+        titleClassName='text-emerald-500/80'
+        nextButtonClassName='bg-emerald-400 text-emerald-950 hover:bg-emerald-300 shadow-[0_0_20px_-5px_var(--color-emerald-500)]'
+      >
+        <div className='flex flex-col gap-6 px-6 py-4'>
+          <div className='rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6'>
+            <div className='flex items-center gap-3'>
+              <AudioLines className='text-primary size-4' />
+              <h3 className='text-xs tracking-widest text-zinc-500 uppercase'>
+                {t('vocalGymFeature.transcriptAnalysis')}
+              </h3>
+            </div>
+            <Separator className='my-4 bg-gray-800' />
 
-          <div className="px-6 py-4 flex flex-col gap-6">
-             <div className="bg-zinc-900/50 rounded-2xl p-6 border border-zinc-800">
-                <div className="flex items-center gap-3">
-                   <AudioLines className='size-4 text-primary' />
-                   <h3 className="text-xs text-zinc-500 tracking-widest uppercase">{t('vocalGymFeature.transcriptAnalysis')}</h3>
-                </div>
-                <Separator className='my-4 bg-gray-800' />
+            <div className='mb-6'>
+              <h4 className='mb-2 text-[10px] font-bold text-zinc-600 uppercase'>
+                {t('vocalGymFeature.target')}
+              </h4>
+              <p className='font-serif text-xl text-zinc-300 italic'>
+                "{currentPhrase}"
+              </p>
+            </div>
 
-                <div className="mb-6">
-                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">{t('vocalGymFeature.target')}</h4>
-                   <p className="font-serif text-xl text-zinc-300 italic">"{currentPhrase}"</p>
-                </div>
-
-                <div>
-                   <h4 className="text-[10px] font-bold text-zinc-600 uppercase mb-2">{t('vocalGymFeature.input')}</h4>
-                   <div className="font-mono text-sm leading-relaxed">
-                      <TranscriptHighlighter
-                        transcript={transcript}
-                        targetDrill={currentDrillFiltered}
-                        correctClass="text-yellow-400"
-                        incorrectClass="font-mono text-yellow-400 underline decoration-red-500 decoration-wavy underline-offset-4"
-                      />
-                   </div>
-                </div>
-             </div>
+            <div>
+              <h4 className='mb-2 text-[10px] font-bold text-zinc-600 uppercase'>
+                {t('vocalGymFeature.input')}
+              </h4>
+              <div className='font-mono text-sm leading-relaxed'>
+                <TranscriptHighlighter
+                  transcript={transcript}
+                  targetDrill={currentDrillFiltered}
+                  correctClass='text-yellow-400'
+                  incorrectClass='font-mono text-yellow-400 underline decoration-red-500 decoration-wavy underline-offset-4'
+                />
+              </div>
+            </div>
           </div>
-
-
-          <DrawerFooter className="px-6 pb-8 pt-2 grid grid-cols-2 gap-4">
-             <button
-               onClick={handleRetry}
-               className="group flex items-center justify-center gap-2 rounded-full border border-zinc-800 bg-transparent py-4 text-xs font-bold tracking-widest text-zinc-300 uppercase transition-all hover:bg-zinc-900 active:scale-95"
-             >
-               <RotateCcw className="h-4 w-4 transition-transform group-hover:-rotate-90" />
-               {t('vocalGymFeature.retryOper')}
-             </button>
-             <button
-               onClick={handleRandomSentence}
-               className="group flex items-center justify-center gap-2 rounded-full bg-emerald-400 py-4 text-xs font-bold tracking-widest text-emerald-950 uppercase transition-all hover:bg-emerald-300 active:scale-95 shadow-[0_0_20px_-5px_var(--color-emerald-500)]"
-             >
-               {t('vocalGymFeature.nextProtocol')}
-               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-             </button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+        </div>
+      </ScoreDrawer>
     </div>
   )
 }
