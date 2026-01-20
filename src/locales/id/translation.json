@@ -54,9 +54,9 @@
         "retryOper": "ULANG",
         "nextProtocol": "LANJUT",
         "zenType": "ZEN TYPE",
-        "precisionFailure": "KEGAGALAN PRESISI!",
-        "backspaceDisabled": "Tombol backspace dinonaktifkan. Presisi adalah kewajiban.",
-        "efficiencyRating": "PERINGKAT EFISIENSI",
+        "precisionFailure": "TIDAK SESUAI!",
+        "backspaceDisabled": "Tombol backspace dinonaktifkan. Harus sesuai.",
+        "efficiencyRating": "NILAI EFISIENSI",
         "keystrokes": "KETIKAN",
         "zenQuotes": [
             "Perjalanan seribu mil dimulai dengan satu langkah.",
@@ -82,8 +82,8 @@
         ]
     },
     "scienceModal": {
-        "title": "BASIS RISET",
-        "validatedBy": "Validasi Neurosains",
+        "title": "RISET",
+        "validatedBy": "Tervalidasi oleh Neurosains",
         "close": "Tutup",
         "features": {
             "focusReader": {
