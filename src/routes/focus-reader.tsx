@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { FocusReader } from '@/features/focus-reader/components/focus-reader'
 
 export const Route = createFileRoute('/focus-reader')({
-  component: () => <div className="p-4 text-white">Focus Reader Feature</div>,
+  component: FocusReader,
 })
