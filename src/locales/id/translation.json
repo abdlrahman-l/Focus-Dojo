@@ -1,149 +1,157 @@
 {
-    "selectLanguage": "Pilih bahasa latihan:",
-    "initializeProtocol": "MULAI",
-    "indonesian": "Bahasa Indonesia",
-    "english": "Bahasa Inggris",
-    "title": "FOCUS DOJO",
-    "dashboard": {
-        "welcomeBack": "Halo, {{name}}.",
-        "recoveryScore": "RECOVERY SCORE",
-        "focusReader": {
-            "title": "FOCUS READER",
-            "description": "LATIHAN DEEP READING"
-        },
-        "vocalGym": {
-            "title": "VOCAL GYM",
-            "description": "LATIHAN ARTIKULASI"
-        },
-        "zenType": {
-            "title": "ZEN TYPE",
-            "description": "KESABARAN & PRESISI"
-        }
+  "selectLanguage": "Pilih bahasa latihan:",
+  "initializeProtocol": "MULAI",
+  "indonesian": "Bahasa Indonesia",
+  "english": "Bahasa Inggris",
+  "title": "FOCUS DOJO",
+  "dashboard": {
+    "welcomeBack": "Halo, {{name}}.",
+    "recoveryScore": "RECOVERY SCORE",
+    "focusReader": {
+      "title": "FOCUS READER",
+      "description": "LATIHAN DEEP READING"
     },
-    "vocalGymFeature": {
-        "articulationDrill": "LATIHAN ARTIKULASI",
-        "readAloud": "BACA BERSUARA",
-        "listening": "Mendengarkan...",
-        "speakClearly": "Ucapkan dengan jelas dan pelan.",
-        "pressMic": "Tap mic untuk mulai",
-        "phrase": "Ular melingkar-lingkar di pagar pak Umar.",
-        "changeSentence": "Ganti Soal",
-        "drills": [
-            "Ular melingkar-lingkar di pagar pak Umar.",
-            "Kuku kaki kakak kakekku kaku-kaku.",
-            "Dudung, ambilkan dandang di dinding dong, Dung.",
-            "Kelapa diparut, kepala digaruk.",
-            "Satu ribu, dua biru, tiga ribu, empat biru.",
-            "Kucing kuningku kencing dikunci-kunciku.",
-            "Buaya biawak buai bayi buaya.",
-            "Tokek makan tongkol, tongkol dimakan tokek.",
-            "Rika lari-lari di lorong-lorong.",
-            "Saya suka sate sapi surabaya.",
-            "Kutuku butuh tubuhku, tapi tubuhku tak butuh kutuku.",
-            "Bebek bekal bapak babak belur dibakar besok.",
-            "Bolak balik belok balok.",
-            "Siapa sih yang sibuk sikat gigi si Sisi?",
-            "Keledai makan kedelai di kedai.",
-            "Kakak kok kukur-kukur kuku kaki kakak?",
-            "Cengkir kencur cengkeh kencur."
-        ],
-        "precisionAcquired": "PRESISI TERCAPAI",
-        "transcriptAnalysis": "ANALISIS TRANSKRIP",
-        "target": "TARGET",
-        "input": "INPUT",
-        "retryOper": "ULANG",
-        "nextProtocol": "LANJUT",
-        "zenType": "ZEN TYPE",
-        "precisionFailure": "TIDAK SESUAI!",
-        "backspaceDisabled": "Tombol backspace dinonaktifkan. Harus sesuai.",
-        "efficiencyRating": "NILAI EFISIENSI",
-        "keystrokes": "KETIKAN",
-        "zenQuotes": [
-            "Perjalanan seribu mil dimulai dengan satu langkah.",
-            "Amor Fati.",
-            "Fokus adalah seni mengetahui apa yang harus diabaikan.",
-            "Kesederhanaan adalah kecanggihan tertinggi.",
-            "Satu-satunya cara melakukan pekerjaan hebat adalah dengan mencintai apa yang Anda lakukan.",
-            "Percayalah kamu bisa dan kamu sudah setengah jalan.",
-            "Dia yang punya alasan untuk hidup bisa menanggung hampir segala cara.",
-            "Jangan buang waktu berdebat tentang orang baik. Jadilah salah satunya.",
-            "Balas dendam terbaik adalah tidak menjadi seperti musuhmu.",
-            "Bukan kematian yang harus ditakuti, tapi ketakutan untuk mulai hidup.",
-            "Pengetahuan adalah kekuatan.",
-            "Aku berpikir, maka aku ada.",
-            "Mengenal diri sendiri adalah awal dari semua kebijaksanaan.",
-            "Pengalaman adalah nama yang diberikan orang pada kesalahan mereka.",
-            "Kebahagiaan bergantung pada diri kita sendiri.",
-            "Segala sesuatu yang dapat kamu bayangkan adalah nyata.",
-            "Ubah lukamu menjadi kebijaksanaan.",
-            "Ubah pikiranmu dan kamu mengubah duniamu.",
-            "Kedamaian datang dari dalam. Jangan mencarinya di luar.",
-            "Tidak masalah seberapa lambat kamu berjalan selama kamu tidak berhenti."
-        ]
+    "vocalGym": {
+      "title": "VOCAL GYM",
+      "description": "LATIHAN ARTIKULASI"
     },
-    "focusReaderFeature": {
-        "sourceSelect": {
-            "title": "Pilih Sumber Bacaan",
-            "tabs": {
-                "library": "TEMPLATE",
-                "custom": "TEKS SENDIRI"
-            },
-            "libraryItems": {
-                "mental-fatigue": {
-                    "title": "Kenapa Kita Sering Merasa Capek Padahal Nggak Ngapa-ngapain",
-                    "description": "Lelah mental, overstimulasi, dan pentingnya jeda.",
-                    "content": "Pernah nggak sih, ngerasa capek seharian padahal dari pagi cuma duduk, scroll HP, buka laptop sebentar, terus rebahan lagi? Badan nggak ke mana-mana, tapi kepala rasanya penuh dan energi habis entah ke mana. Fenomena ini sekarang makin sering dialami banyak orang, terutama di era digital yang serba cepat dan penuh distraksi. Capek itu ternyata nggak selalu soal fisik. Ada jenis capek lain yang jauh lebih licik, yaitu capek mental. Dan yang bikin repot, kita sering nggak sadar kalau sebenarnya lagi kelelahan secara mental. Capek mental biasanya datang tanpa tanda-tanda yang jelas. Nggak ada otot pegal, nggak ada keringat berlebih, tapi fokus gampang buyar, emosi jadi lebih sensitif, dan hal kecil terasa berat. Bangun tidur pun rasanya nggak segar, padahal jam tidur cukup. Salah satu penyebab utamanya adalah overstimulasi. Setiap hari, otak kita dipaksa menerima ratusan bahkan ribuan informasi. Notifikasi chat, email kerja, berita, media sosial, video pendek, dan konten random yang muncul tanpa diminta. Otak bekerja terus, meskipun badan kelihatan santai. Ironisnya, kita sering mengira scrolling itu bentuk istirahat. Padahal buat otak, itu justru kerja lembur tanpa dibayar. Banyak orang terjebak di kondisi sibuk tapi nggak produktif. Dari luar kelihatan aktif, tapi di dalam rasanya kosong. To-do list panjang, tapi yang benar-benar selesai sedikit. Akhirnya muncul rasa bersalah, lalu stres, lalu capek. Produktif itu bukan soal melakukan banyak hal, tapi melakukan hal yang tepat dengan sadar. Ketika kita sibuk tanpa arah, energi habis tapi hasilnya nggak terasa. Di titik ini, capek bukan karena kerja keras, tapi karena kerja tanpa makna. Kesalahan umum lainnya adalah mengira jeda itu harus diisi hiburan. Setiap ada waktu kosong, refleks buka HP. Padahal otak justru butuh hening. Waktu di mana nggak ada input baru, nggak ada yang ditonton, dan nggak ada yang perlu dipikirkan. Jeda yang sehat itu bisa sesederhana: Duduk diam 5 menit tanpa layar, jalan kaki sebentar tanpa headset, atau menarik napas dalam dan sadar sama tubuh sendiri. Hal-hal kecil ini kelihatannya sepele, tapi dampaknya besar buat kesehatan mental. Di zaman sekarang, fokus adalah barang langka. Bukan karena kita malas, tapi karena lingkungan memang dirancang buat memecah perhatian. Aplikasi berlomba-lomba bikin kita betah berlama-lama, bukan beres lebih cepat. Akibatnya, kemampuan fokus menurun pelan-pelan. Kita jadi gampang bosan, pengen cepat selesai, tapi nggak sabar lewat proses. Ini bikin banyak orang merasa 'nggak kayak dulu', padahal yang berubah bukan otaknya, tapi lingkungannya. Solusi dari capek mental nggak selalu rumit. Kadang justru perlu mundur selangkah dan kembali ke hal-hal dasar. Tidur cukup, makan bener, gerak badan, dan ngobrol sama orang tanpa distraksi layar. Nggak harus langsung detox digital ekstrem. Mulai aja dari hal kecil: matiin notifikasi yang nggak penting, tentuin jam khusus buat fokus, dan izinin diri buat nggak selalu responsif. Karena pada akhirnya, hidup bukan soal seberapa cepat kita bergerak, tapi seberapa sadar kita menjalaninya. Kalau hari ini kamu ngerasa capek tanpa alasan yang jelas, mungkin itu tanda buat berhenti sebentar. Bukan menyerah, tapi ngasih ruang buat diri sendiri bernapas. Capek itu sinyal, bukan kelemahan. Dan dengerin sinyal itu justru tanda kamu peduli sama diri sendiri."
-                },
-                "dopamine-loop": {
-                    "title": "Loop Dopamin",
-                    "description": "Neurologi kecanduan scrolling & sistem reward.",
-                    "content": "Loop dopamin adalah siklus hasrat dan hadiah yang terus berputar yang mendorong perilaku adiktif, terutama dalam konteks media sosial dan konsumsi digital. Saat kita menelusuri umpan berita, otak kita melepaskan dopamin untuk mengantisipasi hadiah—seperti like, komentar, atau konten menarik. Pelepasan ini menciptakan sensasi menyenangkan yang memperkuat perilaku tersebut, membuat kita ingin mengulanginya. Seiring waktu, otak beradaptasi dengan tingkat dopamin yang tinggi ini, membutuhkan lebih banyak stimulasi untuk mencapai efek yang sama, yang mengarah pada scrolling kompulsif dan berkurangnya kemampuan untuk fokus pada tugas-tugas yang kurang menstimulasi. Memahami mekanisme ini adalah langkah pertama untuk membebaskan diri dari siklus tersebut dan merebut kembali kendali atas perhatian kita."
-                },
-                "attention-residue": {
-                    "title": "Teori Residu Perhatian",
-                    "description": "Kenapa multitasking menurunkan fungsi kognitif.",
-                    "content": "Residu perhatian adalah konsep yang diperkenalkan oleh Sophie Leroy, yang menggambarkan biaya kognitif dari peralihan tugas. Ketika Anda mengubah fokus Anda dari satu tugas ke tugas lain, \"residu\" perhatian Anda tetap tertinggal pada tugas semula. Residu ini menempati sumber daya mental, mengurangi kapasitas kognitif Anda yang tersedia untuk tugas baru. Bahkan pemeriksaan email atau media sosial yang cepat dapat menciptakan residu ini, yang menyebabkan penurunan kinerja dan IQ yang signifikan. Untuk meminimalkan residu perhatian, sangat penting untuk bekerja dalam blok waktu yang panjang dan tidak terputus serta menyelesaikan satu tugas sepenuhnya sebelum beralih ke tugas berikutnya."
-                },
-                "deep-work": {
-                    "title": "Mekanika Deep Work",
-                    "description": "Strategi untuk kondisi konsentrasi penuh.",
-                    "content": "Deep work atau kerja dalam mengacu pada aktivitas profesional yang dilakukan dalam keadaan konsentrasi bebas gangguan yang mendorong kemampuan kognitif Anda hingga batasnya. Upaya ini menciptakan nilai baru, meningkatkan keterampilan Anda, dan sulit ditiru. Sebaliknya, shallow work atau kerja dangkal terdiri dari tugas-tugas gaya logistik yang tidak menuntut secara kognitif, sering kali dilakukan saat terganggu. Kemampuan untuk melakukan deep work menjadi semakin langka pada saat yang sama ketika menjadi semakin berharga dalam ekonomi kita. Mengembangkan keterampilan ini membutuhkan latihan disiplin, pengendalian lingkungan, dan komitmen untuk memprioritaskan pekerjaan berdampak tinggi daripada kesibukan yang tidak berarti."
-                },
-                "cognitive-load": {
-                    "title": "Teori Beban Kognitif",
-                    "description": "Batas pemrosesan pikiran manusia.",
-                    "content": "Teori beban kognitif menunjukkan bahwa otak manusia memiliki sumber daya memori kerja yang terbatas. Saat belajar atau melakukan tugas, sumber daya ini digunakan untuk memproses informasi. Jika jumlah informasi melebihi kapasitas otak, kelebihan beban kognitif terjadi, yang menyebabkan kesalahan, frustrasi, dan berkurangnya pembelajaran. Ada tiga jenis beban kognitif: intrinsik (kesulitan materi), ekstraneous (bagaimana materi disajikan), dan germane (pemrosesan untuk pembelajaran). Desain dan kebiasaan kerja yang efektif bertujuan untuk meminimalkan beban ekstraneous dan mengelola beban intrinsik untuk memaksimalkan beban germane, sehingga mengoptimalkan kinerja dan pemahaman."
-                }
-            },
-            "customPlaceholder": "Tempel teks Anda di sini...",
-            "initiate": "Mulai Sesi"
-        },
-        "speedWarning": "Terlalu cepat! Jangan skimming, baca dengan dalam.",
-        "charLimitError": "Teks melebihi batas {{limit}} karakter.",
-        "emptyTextError": "Mohon masukkan teks.",
-        "sessionInitialized": "Sesi membaca dimulai",
-        "tapToStart": "Tap layar untuk mulai"
-    },
-    "scienceModal": {
-        "title": "RISET",
-        "validatedBy": "Tervalidasi oleh Neurosains",
-        "close": "Tutup",
-        "features": {
-            "focusReader": {
-                "title": "Visual Gating (Focus Reader)",
-                "content": "Menggunakan metode 'Moving Window' untuk membatasi penglihatan samping. Ini menghilangkan gerakan mata loncat-loncat (sakadik) saat skimming, memaksa otak memproses info secara linear dan paham lebih dalam.",
-                "featureHook": "Cegah skimming dengan membatasi pandangan secara fisik."
-            },
-            "vocalGym": {
-                "title": "The Production Effect (Vocal Gym)",
-                "content": "Membaca bersuara menciptakan jejak memori yang kuat. Proses 'dual-coding' ini menyinkronkan mulut dan pendengaran, efektif untuk 'menimpa' suara pikiran yang berisik (overthinking).",
-                "featureHook": "Aktifkan motorik untuk meredam pikiran yang melantur."
-            },
-            "zenType": {
-                "title": "Cognitive Inhibition (Zen Type)",
-                "content": "Tanpa tombol backspace, otak dipaksa pindah dari mode 'asal ketik' ke mode 'sadar penuh'. Ini melatih Prefrontal Cortex untuk menahan impuls dan lebih teliti sebelum bertindak.",
-                "featureHook": "Paksa fokus penuh dengan mematikan fitur koreksi."
-            }
-        }
+    "zenType": {
+      "title": "ZEN TYPE",
+      "description": "KESABARAN & PRESISI"
     }
+  },
+  "vocalGymFeature": {
+    "articulationDrill": "LATIHAN ARTIKULASI",
+    "readAloud": "BACA BERSUARA",
+    "listening": "Mendengarkan...",
+    "speakClearly": "Ucapkan dengan jelas dan pelan.",
+    "pressMic": "Tap mic untuk mulai",
+    "phrase": "Ular melingkar-lingkar di pagar pak Umar.",
+    "changeSentence": "Ganti Soal",
+    "drills": [
+      "Ular melingkar-lingkar di pagar pak Umar.",
+      "Kuku kaki kakak kakekku kaku-kaku.",
+      "Dudung, ambilkan dandang di dinding dong, Dung.",
+      "Kelapa diparut, kepala digaruk.",
+      "Satu ribu, dua biru, tiga ribu, empat biru.",
+      "Kucing kuningku kencing dikunci-kunciku.",
+      "Buaya biawak buai bayi buaya.",
+      "Tokek makan tongkol, tongkol dimakan tokek.",
+      "Rika lari-lari di lorong-lorong.",
+      "Saya suka sate sapi surabaya.",
+      "Kutuku butuh tubuhku, tapi tubuhku tak butuh kutuku.",
+      "Bebek bekal bapak babak belur dibakar besok.",
+      "Bolak balik belok balok.",
+      "Siapa sih yang sibuk sikat gigi si Sisi?",
+      "Keledai makan kedelai di kedai.",
+      "Kakak kok kukur-kukur kuku kaki kakak?",
+      "Cengkir kencur cengkeh kencur."
+    ],
+    "precisionAcquired": "PRESISI TERCAPAI",
+    "transcriptAnalysis": "ANALISIS TRANSKRIP",
+    "target": "TARGET",
+    "input": "INPUT",
+    "retryOper": "ULANG",
+    "nextProtocol": "LANJUT",
+    "zenType": "ZEN TYPE",
+    "precisionFailure": "TIDAK SESUAI!",
+    "backspaceDisabled": "Tombol backspace dinonaktifkan. Harus sesuai.",
+    "efficiencyRating": "NILAI EFISIENSI",
+    "keystrokes": "KETIKAN",
+    "zenQuotes": [
+      "Perjalanan seribu mil dimulai dengan satu langkah.",
+      "Amor Fati.",
+      "Fokus adalah seni mengetahui apa yang harus diabaikan.",
+      "Kesederhanaan adalah kecanggihan tertinggi.",
+      "Satu-satunya cara melakukan pekerjaan hebat adalah dengan mencintai apa yang Anda lakukan.",
+      "Percayalah kamu bisa dan kamu sudah setengah jalan.",
+      "Dia yang punya alasan untuk hidup bisa menanggung hampir segala cara.",
+      "Jangan buang waktu berdebat tentang orang baik. Jadilah salah satunya.",
+      "Balas dendam terbaik adalah tidak menjadi seperti musuhmu.",
+      "Bukan kematian yang harus ditakuti, tapi ketakutan untuk mulai hidup.",
+      "Pengetahuan adalah kekuatan.",
+      "Aku berpikir, maka aku ada.",
+      "Mengenal diri sendiri adalah awal dari semua kebijaksanaan.",
+      "Pengalaman adalah nama yang diberikan orang pada kesalahan mereka.",
+      "Kebahagiaan bergantung pada diri kita sendiri.",
+      "Segala sesuatu yang dapat kamu bayangkan adalah nyata.",
+      "Ubah lukamu menjadi kebijaksanaan.",
+      "Ubah pikiranmu dan kamu mengubah duniamu.",
+      "Kedamaian datang dari dalam. Jangan mencarinya di luar.",
+      "Tidak masalah seberapa lambat kamu berjalan selama kamu tidak berhenti."
+    ]
+  },
+  "focusReaderFeature": {
+    "sourceSelect": {
+      "title": "Pilih Sumber Bacaan",
+      "tabs": {
+        "library": "TEMPLATE",
+        "custom": "TEKS SENDIRI"
+      },
+      "libraryItems": {
+        "mental-fatigue": {
+          "title": "Kenapa Kita Sering Merasa Capek Padahal Nggak Ngapa-ngapain",
+          "description": "Lelah mental, overstimulasi, dan pentingnya jeda.",
+          "content": "Pernah nggak sih, ngerasa capek seharian padahal dari pagi cuma duduk, scroll HP, buka laptop sebentar, terus rebahan lagi? Badan nggak ke mana-mana, tapi kepala rasanya penuh dan energi habis entah ke mana. Fenomena ini sekarang makin sering dialami banyak orang, terutama di era digital yang serba cepat dan penuh distraksi. Capek itu ternyata nggak selalu soal fisik. Ada jenis capek lain yang jauh lebih licik, yaitu capek mental. Dan yang bikin repot, kita sering nggak sadar kalau sebenarnya lagi kelelahan secara mental. Capek mental biasanya datang tanpa tanda-tanda yang jelas. Nggak ada otot pegal, nggak ada keringat berlebih, tapi fokus gampang buyar, emosi jadi lebih sensitif, dan hal kecil terasa berat. Bangun tidur pun rasanya nggak segar, padahal jam tidur cukup. Salah satu penyebab utamanya adalah overstimulasi. Setiap hari, otak kita dipaksa menerima ratusan bahkan ribuan informasi. Notifikasi chat, email kerja, berita, media sosial, video pendek, dan konten random yang muncul tanpa diminta. Otak bekerja terus, meskipun badan kelihatan santai. Ironisnya, kita sering mengira scrolling itu bentuk istirahat. Padahal buat otak, itu justru kerja lembur tanpa dibayar. Banyak orang terjebak di kondisi sibuk tapi nggak produktif. Dari luar kelihatan aktif, tapi di dalam rasanya kosong. To-do list panjang, tapi yang benar-benar selesai sedikit. Akhirnya muncul rasa bersalah, lalu stres, lalu capek. Produktif itu bukan soal melakukan banyak hal, tapi melakukan hal yang tepat dengan sadar. Ketika kita sibuk tanpa arah, energi habis tapi hasilnya nggak terasa. Di titik ini, capek bukan karena kerja keras, tapi karena kerja tanpa makna. Kesalahan umum lainnya adalah mengira jeda itu harus diisi hiburan. Setiap ada waktu kosong, refleks buka HP. Padahal otak justru butuh hening. Waktu di mana nggak ada input baru, nggak ada yang ditonton, dan nggak ada yang perlu dipikirkan. Jeda yang sehat itu bisa sesederhana: Duduk diam 5 menit tanpa layar, jalan kaki sebentar tanpa headset, atau menarik napas dalam dan sadar sama tubuh sendiri. Hal-hal kecil ini kelihatannya sepele, tapi dampaknya besar buat kesehatan mental. Di zaman sekarang, fokus adalah barang langka. Bukan karena kita malas, tapi karena lingkungan memang dirancang buat memecah perhatian. Aplikasi berlomba-lomba bikin kita betah berlama-lama, bukan beres lebih cepat. Akibatnya, kemampuan fokus menurun pelan-pelan. Kita jadi gampang bosan, pengen cepat selesai, tapi nggak sabar lewat proses. Ini bikin banyak orang merasa 'nggak kayak dulu', padahal yang berubah bukan otaknya, tapi lingkungannya. Solusi dari capek mental nggak selalu rumit. Kadang justru perlu mundur selangkah dan kembali ke hal-hal dasar. Tidur cukup, makan bener, gerak badan, dan ngobrol sama orang tanpa distraksi layar. Nggak harus langsung detox digital ekstrem. Mulai aja dari hal kecil: matiin notifikasi yang nggak penting, tentuin jam khusus buat fokus, dan izinin diri buat nggak selalu responsif. Karena pada akhirnya, hidup bukan soal seberapa cepat kita bergerak, tapi seberapa sadar kita menjalaninya. Kalau hari ini kamu ngerasa capek tanpa alasan yang jelas, mungkin itu tanda buat berhenti sebentar. Bukan menyerah, tapi ngasih ruang buat diri sendiri bernapas. Capek itu sinyal, bukan kelemahan. Dan dengerin sinyal itu justru tanda kamu peduli sama diri sendiri."
+        },
+        "dopamine-loop": {
+          "title": "Loop Dopamin",
+          "description": "Kenapa scrolling bikin kecanduan dan gimana sistem reward otak bekerja.",
+          "content": "Loop dopamin adalah siklus keinginan dan hadiah yang mendorong perilaku adiktif, terutama di media sosial dan konsumsi digital. Saat kita scroll umpan, otak melepaskan dopamin karena mengantisipasi hadiah seperti like, komentar, atau konten yang menarik. Rasa enak itu memperkuat kebiasaan supaya kita mau mengulanginya. Lama-lama otak butuh rangsangan lebih supaya terasa sama, sehingga muncullah scrolling kompulsif dan kemampuan fokus ke tugas yang kurang stimulatif jadi menurun. Memahami mekanisme ini adalah langkah awal untuk keluar dari siklus dan kembali mengendalikan perhatian."
+        },
+        "attention-residue": {
+          "title": "Teori Residu Perhatian",
+          "description": "Kenapa multitasking bikin performa otak turun.",
+          "content": "Residu perhatian, istilah dari Sophie Leroy, menggambarkan biaya kognitif saat berpindah tugas. Waktu kamu geser fokus dari tugas A ke tugas B, sisa perhatian masih nempel ke tugas A. Sisa ini memakan sumber daya mental sehingga kapasitas untuk tugas baru jadi berkurang. Sekalipun cuma cek email atau media sosial sebentar, residu ini bisa muncul dan menurunkan kinerja serta daya fokus. Untuk menguranginya, kerjakan dalam blok waktu tanpa gangguan dan selesaikan satu tugas sebelum pindah ke tugas lain."
+        },
+        "deep-work": {
+          "title": "Mekanika Deep Work",
+          "description": "Strategi untuk mencapai konsentrasi mendalam.",
+          "content": "Deep work adalah aktivitas profesional yang dilakukan dalam kondisi fokus penuh tanpa gangguan sampai kemampuan kognitif benar-benar dipakai maksimal. Aktivitas ini menciptakan nilai baru, mempercepat peningkatan keterampilan, dan sulit ditiru orang lain. Sebaliknya, shallow work adalah tugas rutin yang ringan dan sering dikerjakan sambil terganggu. Kemampuan melakukan deep work makin langka, padahal nilainya makin besar. Menguasainya butuh latihan disiplin, mengatur lingkungan kerja, dan berani memprioritaskan pekerjaan berdampak tinggi daripada sekadar sibuk."
+        },
+        "cognitive-load": {
+          "title": "Teori Beban Kognitif",
+          "description": "Batas kapasitas pemrosesan otak manusia.",
+          "content": "Teori beban kognitif menyatakan bahwa otak punya kapasitas memori kerja yang terbatas. Saat belajar atau mengerjakan tugas, kapasitas ini dipakai untuk memproses informasi. Kalau informasi melebihi kapasitas, terjadi beban berlebih yang menyebabkan kesalahan, frustrasi, dan menurunnya efektivitas belajar. Ada tiga jenis beban, yaitu intrinsik yang berkaitan dengan tingkat kesulitan materi, ekstraneous yang berasal dari cara penyajian yang membingungkan, dan germane yang mendukung proses pembelajaran. Desain materi dan kebiasaan kerja yang baik bertujuan mengurangi beban ekstraneous dan mengelola beban intrinsik agar beban germane bisa maksimal, sehingga pemahaman dan performa meningkat."
+        }
+      },
+      "customPlaceholder": "Tempel teks Anda di sini...",
+      "initiate": "Mulai Sesi"
+    },
+    "speedWarning": "Terlalu cepat! Jangan skimming, baca dengan dalam.",
+    "charLimitError": "Teks melebihi batas {{limit}} karakter.",
+    "emptyTextError": "Mohon masukkan teks.",
+    "sessionInitialized": "Sesi membaca dimulai",
+    "tapToStart": "Tap layar untuk pindah",
+    "results": {
+        "deepFocusIndex": "INDEKS FOKUS MENDALAM",
+        "averageSpeed": "KECEPATAN RATA-RATA",
+        "wpm": "WPM",
+        "skimmingPenalty": "Penalti Skimming: {{count}}",
+        "retry": "BACA ULANG",
+        "next": "LANJUT"
+    }
+  },
+  "scienceModal": {
+    "title": "RISET",
+    "validatedBy": "Tervalidasi oleh Neurosains",
+    "close": "Tutup",
+    "features": {
+      "focusReader": {
+        "title": "Visual Gating (Focus Reader)",
+        "content": "Menggunakan metode 'Moving Window' untuk membatasi penglihatan samping. Ini menghilangkan gerakan mata loncat-loncat (sakadik) saat skimming, memaksa otak memproses info secara linear dan paham lebih dalam.",
+        "featureHook": "Cegah skimming dengan membatasi pandangan secara fisik."
+      },
+      "vocalGym": {
+        "title": "The Production Effect (Vocal Gym)",
+        "content": "Membaca bersuara menciptakan jejak memori yang kuat. Proses 'dual-coding' ini menyinkronkan mulut dan pendengaran, efektif untuk 'menimpa' suara pikiran yang berisik (overthinking).",
+        "featureHook": "Aktifkan motorik untuk meredam pikiran yang melantur."
+      },
+      "zenType": {
+        "title": "Cognitive Inhibition (Zen Type)",
+        "content": "Tanpa tombol backspace, otak dipaksa pindah dari mode 'asal ketik' ke mode 'sadar penuh'. Ini melatih Prefrontal Cortex untuk menahan impuls dan lebih teliti sebelum bertindak.",
+        "featureHook": "Paksa fokus penuh dengan mematikan fitur koreksi."
+      }
+    }
+  }
 }

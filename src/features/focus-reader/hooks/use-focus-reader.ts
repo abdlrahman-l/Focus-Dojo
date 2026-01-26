@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { toast } from 'sonner'
 import {
-  SPEED_LIMIT_WPM,
   MIN_WORDS_FOR_SPEED_CHECK,
   MAX_CHAR_LIMIT,
 } from '@/features/focus-reader/constants'
@@ -10,17 +9,30 @@ import { useTranslation } from 'react-i18next'
 
 export function useFocusReader() {
   const { t } = useTranslation()
-  const [rawText, setRawText] = useState(t('focusReaderFeature.sourceSelect.libraryItems.mental-fatigue.content'))
-  const [currentArticleId, setCurrentArticleId] = useState<string | null>('mental-fatigue')
+  const [rawText, setRawText] = useState(
+    t('focusReaderFeature.sourceSelect.libraryItems.mental-fatigue.content')
+  )
+  const [currentArticleId, setCurrentArticleId] =
+    useState<string | null>('mental-fatigue')
   const [activeIndex, setActiveIndex] = useState(0)
   const [wpm, setWpm] = useState(0)
   const [isSpeedWarning, setIsSpeedWarning] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
+  // Scoring & Stats
+  const [score, setScore] = useState(100)
+  const [skimmingCount, setSkimmingCount] = useState(0)
+  const [isResultOpen, setIsResultOpen] = useState(false)
+  const [finalWpm, setFinalWpm] = useState(0)
+
   // Track the timestamp of the *start* of the current sentence reading
   const lastAdvanceTimeRef = useRef<number>(Date.now())
   const activeSentenceRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  // Session Stats Refs
+  const totalWordsReadRef = useRef(0)
+  const sessionStartTimeRef = useRef(0)
 
   const sentences = useMemo(() => splitIntoSentences(rawText), [rawText])
   const totalSentences = sentences.length
@@ -37,7 +49,19 @@ export function useFocusReader() {
   }, [activeIndex])
 
   const handleAdvance = useCallback(() => {
-    if (activeIndex >= totalSentences - 1) return
+    if (activeIndex >= totalSentences - 1) {
+      // Session Complete
+      const sessionDurationMinutes =
+        (Date.now() - sessionStartTimeRef.current) / 60000
+      // Prevent division by zero
+      const validDuration =
+        sessionDurationMinutes > 0 ? sessionDurationMinutes : 0.1
+      const avgWpm = Math.round(totalWordsReadRef.current / validDuration)
+
+      setFinalWpm(avgWpm)
+      setIsResultOpen(true)
+      return
+    }
 
     const now = Date.now()
     const currentSentence = sentences[activeIndex]
@@ -52,20 +76,35 @@ export function useFocusReader() {
         now
       )
 
-      if (currentWpm > SPEED_LIMIT_WPM) {
+      // SPEED TRAP: Anti-Skimming (> 650 WPM)
+      // If reading inhumanly fast, assume skimming.
+      // 650 is a reasonable upper bound for deep reading comprehension.
+      if (currentWpm > 650) {
         setIsSpeedWarning(true)
+        setScore((prev) => Math.max(0, prev - 10))
+        setSkimmingCount((prev) => prev + 1)
+        
         toast.warning(t('focusReaderFeature.speedWarning'), {
           className: 'bg-red-500 text-white border-none',
           duration: 2000,
         })
+        
         // Shake effect reset after animation
         setTimeout(() => setIsSpeedWarning(false), 500)
-        return // PUNISHMENT: Do not advance
+        
+        // Do NOT advance totalWordsRead (skimming is not reading)
+        // We still advance the text index to let them continue, but with penalty.
+      } else {
+        // Valid reading speed
+        setWpm(currentWpm)
+        totalWordsReadRef.current += wordCount
       }
-      setWpm(currentWpm)
+    } else {
+      // Add words for small sentences too, just skip speed check
+      totalWordsReadRef.current += wordCount
     }
 
-    // Success - Advance
+    // Advance
     setActiveIndex((prev) => prev + 1)
     lastAdvanceTimeRef.current = now
     setIsSpeedWarning(false)
@@ -87,25 +126,51 @@ export function useFocusReader() {
 
     setRawText(text)
     setCurrentArticleId(id)
+    
+    // Reset Everything
     setActiveIndex(0)
     setWpm(0)
-    lastAdvanceTimeRef.current = Date.now()
+    setScore(100)
+    setSkimmingCount(0)
+    totalWordsReadRef.current = 0
+    setIsResultOpen(false)
+    
+    const now = Date.now()
+    lastAdvanceTimeRef.current = now
+    sessionStartTimeRef.current = now
+    
     setIsDrawerOpen(false)
     toast.success(t('focusReaderFeature.sessionInitialized'))
+  }
+
+  const resetSession = () => {
+    setActiveIndex(0)
+    setWpm(0)
+    setScore(100)
+    setSkimmingCount(0)
+    totalWordsReadRef.current = 0
+    setIsResultOpen(false)
+    
+    const now = Date.now()
+    lastAdvanceTimeRef.current = now
+    sessionStartTimeRef.current = now
   }
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: globalThis.KeyboardEvent) => {
-      // If drawer is open, disable space/arrows to prevent background scrolling/action
-      // But we must allow typing in the textarea inside the drawer (which is handled by browser focus)
-      // However, since we are using a portal/drawer, we should block these global listeners if drawer is open.
-      if (isDrawerOpen) return
+      // If any modal/drawer is open, disable space/arrows
+      if (isDrawerOpen || isResultOpen) return
 
       if (e.code === 'Space' || e.code === 'ArrowRight') {
         e.preventDefault()
         handleAdvance()
       } else if (e.code === 'ArrowLeft') {
+        // Backtracking optional logic?
+        // For strict focus reader, backtracking might technically break flow,
+        // but for usability we keep it. 
+        // NOTE: We don't rollback totalWordsRead/Score on backtrack to keep it simple 
+        // and avoid gaming the system.
         if (activeIndex > 0) {
           setActiveIndex((prev) => prev - 1)
           lastAdvanceTimeRef.current = Date.now() // Reset timer
@@ -115,7 +180,7 @@ export function useFocusReader() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [handleAdvance, isDrawerOpen, activeIndex])
+  }, [handleAdvance, isDrawerOpen, isResultOpen, activeIndex])
 
   return {
     rawText,
@@ -132,5 +197,12 @@ export function useFocusReader() {
     setIsDrawerOpen,
     handleAdvance,
     startSession: handleCreateSession,
+    // Results
+    score,
+    skimmingCount,
+    isResultOpen,
+    finalWpm,
+    resetSession,
   }
 }
+

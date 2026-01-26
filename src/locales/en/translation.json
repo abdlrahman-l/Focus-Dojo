@@ -118,7 +118,15 @@
         "charLimitError": "Text exceeds limit of {{limit}} characters.",
         "emptyTextError": "Please enter some text.",
         "sessionInitialized": "Reading session initialized",
-        "tapToStart": "Tap screen to start"
+        "tapToStart": "Tap space to start",
+        "results": {
+            "deepFocusIndex": "DEEP FOCUS INDEX",
+            "averageSpeed": "AVERAGE SPEED",
+            "wpm": "WPM",
+            "skimmingPenalty": "Skimming Penalty: {{count}}",
+            "retry": "READ AGAIN",
+            "next": "NEXT ARTICLE"
+        }
     },
     "scienceModal": {
         "title": "RESEARCH DATA",

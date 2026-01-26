@@ -2,6 +2,7 @@ import { Gauge, Settings2 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { FocusResultDrawer } from '@/features/focus-reader/components/focus-result-drawer'
 import { SourceSelectDrawer } from '@/features/focus-reader/components/source-select-drawer'
 import { useFocusReader } from '@/features/focus-reader/hooks/use-focus-reader'
 
@@ -20,6 +21,12 @@ export function FocusReader() {
     setIsDrawerOpen,
     handleAdvance,
     startSession,
+    // Results
+    score,
+    skimmingCount,
+    isResultOpen,
+    finalWpm,
+    resetSession,
   } = useFocusReader()
 
   return (
@@ -50,6 +57,15 @@ export function FocusReader() {
             <div className='absolute top-1/2 right-0 h-1 w-1 -translate-y-1/2 rounded-full bg-white shadow-[0_0_5px_#fff]' />
           </div>
         </div>
+      </div>
+
+      {/* Instructions */}
+      <div className='fixed top-10 left-1/2 z-50 -translate-x-1/2'>
+        {activeIndex === 0 && (
+          <p className='animate-pulse text-[10px] font-medium tracking-[0.2em] text-white/20 uppercase md:text-xs'>
+            {t('focusReaderFeature.tapToStart')}
+          </p>
+        )}
       </div>
 
       {/* 2. Main Reading Area */}
@@ -125,15 +141,6 @@ export function FocusReader() {
           />
         </div>
 
-        {/* Instructions */}
-        <div className='flex-1 pb-2 text-center'>
-          {activeIndex === 0 && (
-            <p className='animate-pulse text-[10px] font-medium tracking-[0.2em] text-white/20 uppercase md:text-xs'>
-              {t('focusReaderFeature.tapToStart')}
-            </p>
-          )}
-        </div>
-
         {/* WPM Indicator */}
         <div className='flex w-20 items-center justify-end gap-1.5 pb-2'>
           <Gauge className='h-3.5 w-3.5 text-white/30' />
@@ -142,6 +149,26 @@ export function FocusReader() {
           </p>
         </div>
       </div>
+
+      <FocusResultDrawer
+        isOpen={isResultOpen}
+        score={score}
+        wpm={finalWpm}
+        skimmingCount={skimmingCount}
+        distractionCount={0}
+        articleTitle={
+          currentArticleId && currentArticleId !== 'custom'
+            ? t(
+                `focusReaderFeature.sourceSelect.libraryItems.${currentArticleId}.title`
+              )
+            : 'Custom Text'
+        }
+        onRetry={resetSession}
+        onNext={() => {
+          // In a real app, navigate or log result
+          resetSession() // For now just reset
+        }}
+      />
 
       {/* Background Ambience */}
       <div className='relative'>
