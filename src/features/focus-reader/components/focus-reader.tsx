@@ -1,12 +1,14 @@
 import { Gauge, Settings2 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { SourceSelectDrawer } from '@/features/focus-reader/components/source-select-drawer'
-import { PRESETS } from '@/features/focus-reader/constants'
 import { useFocusReader } from '@/features/focus-reader/hooks/use-focus-reader'
 
 export function FocusReader() {
+  const { t } = useTranslation()
   const {
+    currentArticleId,
     activeIndex,
     wpm,
     isSpeedWarning,
@@ -109,12 +111,17 @@ export function FocusReader() {
 
           <SourceSelectDrawer
             isOpen={isDrawerOpen}
+            currentArticleId={currentArticleId}
             onClose={() => setIsDrawerOpen(false)}
             onSelectPreset={(articleId) => {
-              const text = PRESETS[articleId]
-              if (text) startSession(text)
+              const text = t(
+                'focusReaderFeature.sourceSelect.libraryItems.' +
+                  articleId +
+                  '.content'
+              )
+              if (text) startSession(text, articleId)
             }}
-            onPasteSubmit={(text) => startSession(text)}
+            onPasteSubmit={(text) => startSession(text, 'custom')}
           />
         </div>
 
@@ -122,7 +129,7 @@ export function FocusReader() {
         <div className='flex-1 pb-2 text-center'>
           {activeIndex === 0 && (
             <p className='animate-pulse text-[10px] font-medium tracking-[0.2em] text-white/20 uppercase md:text-xs'>
-              Tap space to start
+              {t('focusReaderFeature.tapToStart')}
             </p>
           )}
         </div>

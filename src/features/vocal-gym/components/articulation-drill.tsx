@@ -72,11 +72,11 @@ export function ArticulationDrill() {
         </div>
       </header>
       {/* 2. Prompt Card */}
-      <div className='relative flex aspect-square w-full max-w-sm flex-col items-center justify-center overflow-hidden rounded-4xl bg-neutral-800 p-8 text-center'>
+      <div className='relative flex aspect-square w-full max-w-sm flex-col items-center justify-center overflow-hidden rounded-4xl bg-neutral-800 p-4 text-center'>
         <span className='text-primary mb-6 text-xs font-bold tracking-widest'>
           {t('vocalGymFeature.readAloud')}
         </span>
-        <p className='mb-8 font-serif text-3xl leading-tight text-white'>
+        <p className='mb-8 font-serif text-2xl leading-tight text-white'>
           {currentPhrase}
         </p>
 
@@ -89,7 +89,7 @@ export function ArticulationDrill() {
         </button>
       </div>
       {/* 3. Audio Visualizer (Mock - Simulated) */}
-      <div className='mt-12 flex h-16 items-center justify-center gap-1'>
+      <div className='mt-8 flex h-16 items-center justify-center gap-1'>
         {visualizerBars.map((height, index) => (
           <div
             key={index}
@@ -131,7 +131,7 @@ export function ArticulationDrill() {
         <button
           onClick={toggleListening}
           className={cn(
-            'flex h-20 w-20 items-center justify-center rounded-full shadow-[0_0_30px_-5px_var(--color-primary)] transition-all duration-300',
+            'flex size-16 items-center justify-center rounded-full shadow-[0_0_30px_-5px_var(--color-primary)] transition-all duration-300',
             isListening
               ? 'bg-destructive hover:bg-destructive/90 shadow-[0_0_30px_-5px_var(--color-destructive)]'
               : 'bg-primary hover:bg-primary/90 shadow-[0_0_30px_-5px_var(--color-primary)]'

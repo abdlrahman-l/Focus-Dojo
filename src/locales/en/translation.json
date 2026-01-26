@@ -77,6 +77,49 @@
             "It does not matter how slowly you go as long as you do not stop."
         ]
     },
+    "focusReaderFeature": {
+        "sourceSelect": {
+            "title": "Select Source Material",
+            "tabs": {
+                "library": "DOJO LIBRARY",
+                "custom": "CUSTOM PASTE"
+            },
+            "libraryItems": {
+                "mental-fatigue": {
+                    "title": "Why We Feel Tired Despite Doing Nothing",
+                    "description": "Mental fatigue, overstimulation, and the importance of valid rest.",
+                    "content": "Have you ever felt exhausted all day, even though you just sat around, scrolled through your phone, opened your laptop for a bit, and then lay back down? Your body didn't go anywhere, but your head felt full and your energy was drained. This phenomenon is becoming increasingly common, especially in our fast-paced, distraction-filled digital era. Fatigue isn't always physical. There is another, more insidious type of fatigue: mental fatigue. And the tricky part is, we often don't realize when we are mentally exhausted. Mental fatigue usually comes without clear signs. No sore muscles, no excessive sweating, but focus scatters easily, emotions become more sensitive, and small things feel heavy. You wake up feeling unrefreshed, even after enough sleep. One of the main causes is overstimulation. Every day, our brains are forced to receive hundreds or even thousands of pieces of information. Chat notifications, work emails, news, social media, short videos, and random content appearing uninvited. The brain keeps working, even though the body looks relaxed. Ironically, we often mistake scrolling for rest. But for the brain, it's unpaid overtime. Many people are trapped in a state of being busy but not productive. To the outside world, they look active, but inside, they feel empty. Long to-do lists, but very little actually gets done. Eventually, guilt arises, then stress, then fatigue. Productivity isn't about doing many things, but doing the right things consciously. When we are busy without direction, energy is drained but the results are not felt. At this point, fatigue comes not from hard work, but from meaningless work. Another common mistake is thinking that breaks must be filled with entertainment. Whenever there is free time, the reflex is to open the phone. But the brain actually needs silence. Time where there is no new input, nothing to watch, and nothing to think about. A healthy break can be as simple as: Sitting quietly for 5 minutes without a screen, walking briefly without a headset, or taking a deep breath and being aware of your own body. These small things seem trivial, but they have a huge impact on mental health. Nowadays, focus is a rare commodity. Not because we are lazy, but because the environment is designed to fragment attention. Apps compete to keep us engaged for longer, not to help us finish faster. As a result, our ability to focus slowly declines. We get bored easily, want things done quickly, but lack the patience for the process. This makes many feel 'not like they used to be', even though it's not their brain that changed, but their environment. The solution to mental fatigue isn't always complicated. Sometimes you just need to take a step back and return to basics. Enough sleep, proper food, physical movement, and talking to people without screen distractions. You don't have to go on an extreme digital detox immediately. Just start small: turn off unimportant notifications, set specific times for focus, and allow yourself not to be constantly responsive. Because ultimately, life isn't about how fast we move, but how consciously we live it. If you feel tired today without a clear reason, maybe it's a sign to stop for a while. Not to give up, but to give yourself space to breathe. Fatigue is a signal, not a weakness. And listening to that signal is a sign you care about yourself."
+                },
+                "dopamine-loop": {
+                    "title": "The Dopamine Loop",
+                    "description": "Neurology of scrolling addiction & reward systems.",
+                    "content": "The dopamine loop is a self-perpetuating cycle of craving and reward that drives addictive behaviors, particularly in the context of social media and digital consumption. When we scroll through our feeds, our brains release dopamine in anticipation of a reward—a like, a comment, or an interesting piece of content. This release creates a pleasurable sensation that reinforces the behavior, making us want to repeat it. Over time, the brain adapts to these high levels of dopamine, requiring more stimulation to achieve the same effect, which leads to compulsive scrolling and a reduced ability to focus on less stimulating tasks. Understanding this mechanism is the first step towards breaking free from the cycle and reclaiming control over our attention."
+                },
+                "attention-residue": {
+                    "title": "Attention Residue Theory",
+                    "description": "Why multitasking lowers cognitive function.",
+                    "content": "Attention residue is a concept introduced by Sophie Leroy, which describes the cognitive cost of switching tasks. When you shift your focus from one task to another, a \"residue\" of your attention remains stuck on the original task. This residue occupies mental resources, reducing your cognitive capacity available for the new task. Even quick checks of email or social media can create this residue, leading to a significant drop in performance and IQ. To minimize attention residue, it is essential to work in long, uninterrupted blocks of time and to fully complete one task before moving on to the next."
+                },
+                "deep-work": {
+                    "title": "Deep Work Mechanics",
+                    "description": "Strategies for sustained concentration states.",
+                    "content": "Deep work refers to professional activities performed in a state of distraction-free concentration that push your cognitive capabilities to their limit. These efforts create new value, improve your skill, and are hard to replicate. In contrast, shallow work consists of non-cognitively demanding, logistical-style tasks, often performed while distracted. The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable in our economy. Cultivating this skill requires disciplined practice, environmental control, and a commitment to prioritizing high-impact work over busy work."
+                },
+                "cognitive-load": {
+                    "title": "Cognitive Load Theory",
+                    "description": "Processing limits of the human mind.",
+                    "content": "Cognitive load theory suggests that the human brain has a limited amount of working memory resources. When learning or performing a task, these resources are used to process information. If the amount of information exceeds the brain's capacity, cognitive overload occurs, leading to errors, frustration, and reduced learning. There are three types of cognitive load: intrinsic (difficulty of the material), extraneous (how the material is presented), and germane (processing for learning). Effective design and work habits aim to minimize extraneous load and manage intrinsic load to maximize germane load, thereby optimizing performance and comprehension."
+                }
+            },
+            "customPlaceholder": "Paste your text here...",
+            "initiate": "Initiate Session"
+        },
+        "speedWarning": "Too fast! Don't skim, read deeply.",
+        "charLimitError": "Text exceeds limit of {{limit}} characters.",
+        "emptyTextError": "Please enter some text.",
+        "sessionInitialized": "Reading session initialized",
+        "tapToStart": "Tap screen to start"
+    },
     "scienceModal": {
         "title": "RESEARCH DATA",
         "validatedBy": "Validated by Neuroscience",

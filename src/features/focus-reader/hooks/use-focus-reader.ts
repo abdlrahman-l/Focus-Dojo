@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { toast } from 'sonner'
 import {
-  DEFAULT_TEXT,
   SPEED_LIMIT_WPM,
   MIN_WORDS_FOR_SPEED_CHECK,
   MAX_CHAR_LIMIT,
 } from '@/features/focus-reader/constants'
 import { splitIntoSentences, calculateWPM } from '@/features/focus-reader/utils'
+import { useTranslation } from 'react-i18next'
 
 export function useFocusReader() {
-  const [rawText, setRawText] = useState(DEFAULT_TEXT)
+  const { t } = useTranslation()
+  const [rawText, setRawText] = useState(t('focusReaderFeature.sourceSelect.libraryItems.mental-fatigue.content'))
+  const [currentArticleId, setCurrentArticleId] = useState<string | null>('mental-fatigue')
   const [activeIndex, setActiveIndex] = useState(0)
   const [wpm, setWpm] = useState(0)
   const [isSpeedWarning, setIsSpeedWarning] = useState(false)
@@ -52,7 +54,7 @@ export function useFocusReader() {
 
       if (currentWpm > SPEED_LIMIT_WPM) {
         setIsSpeedWarning(true)
-        toast.warning("Too fast! Don't skim, read deeply.", {
+        toast.warning(t('focusReaderFeature.speedWarning'), {
           className: 'bg-red-500 text-white border-none',
           duration: 2000,
         })
@@ -67,28 +69,29 @@ export function useFocusReader() {
     setActiveIndex((prev) => prev + 1)
     lastAdvanceTimeRef.current = now
     setIsSpeedWarning(false)
-  }, [activeIndex, totalSentences, sentences])
+  }, [activeIndex, totalSentences, sentences, t])
 
-  const handleCreateSession = (text: string) => {
+  const handleCreateSession = (text: string, id: string = 'custom') => {
     if (text.length > MAX_CHAR_LIMIT) {
       toast.error(
-        'Text exceeds limit of ' +
-          MAX_CHAR_LIMIT.toLocaleString() +
-          ' characters.'
+        t('focusReaderFeature.charLimitError', {
+          limit: MAX_CHAR_LIMIT.toLocaleString(),
+        })
       )
       return
     }
     if (text.trim().length === 0) {
-      toast.error('Please enter some text.')
+      toast.error(t('focusReaderFeature.emptyTextError'))
       return
     }
 
     setRawText(text)
+    setCurrentArticleId(id)
     setActiveIndex(0)
     setWpm(0)
     lastAdvanceTimeRef.current = Date.now()
     setIsDrawerOpen(false)
-    toast.success('Reading session initialized')
+    toast.success(t('focusReaderFeature.sessionInitialized'))
   }
 
   // Keyboard navigation
@@ -116,6 +119,7 @@ export function useFocusReader() {
 
   return {
     rawText,
+    currentArticleId,
     activeIndex,
     wpm,
     isSpeedWarning,
