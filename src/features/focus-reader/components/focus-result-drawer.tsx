@@ -18,6 +18,7 @@ export function FocusResultDrawer({
   score,
   wpm,
   skimmingCount,
+  distractionCount,
   articleTitle,
   onRetry,
   onNext,
@@ -65,6 +66,13 @@ export function FocusResultDrawer({
               <p className='mt-1 font-mono text-[11px] font-bold tracking-wide text-[#eab308]/80 uppercase'>
                 {t('focusReaderFeature.results.skimmingPenalty', {
                   count: skimmingCount,
+                })}
+              </p>
+            )}
+            {distractionCount > 0 && (
+              <p className='mt-1 font-mono text-[11px] font-bold tracking-wide text-orange-400/80 uppercase'>
+                {t('focusReaderFeature.results.focusDrifts', {
+                  count: distractionCount,
                 })}
               </p>
             )}

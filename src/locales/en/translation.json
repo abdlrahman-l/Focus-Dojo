@@ -119,11 +119,14 @@
         "emptyTextError": "Please enter some text.",
         "sessionInitialized": "Reading session initialized",
         "tapToStart": "Tap space to start",
+        "driftWarning": "Focus drift detected",
+        "driftWarningDesc": "Keep your flow steady.",
         "results": {
             "deepFocusIndex": "DEEP FOCUS INDEX",
             "averageSpeed": "AVERAGE SPEED",
             "wpm": "WPM",
             "skimmingPenalty": "Skimming Penalty: {{count}}",
+            "focusDrifts": "Focus Drifts: {{count}}",
             "retry": "READ AGAIN",
             "next": "NEXT ARTICLE"
         }

@@ -12,8 +12,9 @@ export function useFocusReader() {
   const [rawText, setRawText] = useState(
     t('focusReaderFeature.sourceSelect.libraryItems.mental-fatigue.content')
   )
-  const [currentArticleId, setCurrentArticleId] =
-    useState<string | null>('mental-fatigue')
+  const [currentArticleId, setCurrentArticleId] = useState<string | null>(
+    'mental-fatigue'
+  )
   const [activeIndex, setActiveIndex] = useState(0)
   const [wpm, setWpm] = useState(0)
   const [isSpeedWarning, setIsSpeedWarning] = useState(false)
@@ -22,17 +23,17 @@ export function useFocusReader() {
   // Scoring & Stats
   const [score, setScore] = useState(100)
   const [skimmingCount, setSkimmingCount] = useState(0)
+  const [distractionCount, setDistractionCount] = useState(0) // Added Distraction State
   const [isResultOpen, setIsResultOpen] = useState(false)
   const [finalWpm, setFinalWpm] = useState(0)
 
-  // Track the timestamp of the *start* of the current sentence reading
+  // Refs
   const lastAdvanceTimeRef = useRef<number>(Date.now())
   const activeSentenceRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-
-  // Session Stats Refs
   const totalWordsReadRef = useRef(0)
-  const sessionStartTimeRef = useRef(0)
+  // Fix: Init dengan Date.now() biar gak NaN/Infinity kalau langsung finish
+  const sessionStartTimeRef = useRef(Date.now())
 
   const sentences = useMemo(() => splitIntoSentences(rawText), [rawText])
   const totalSentences = sentences.length
@@ -49,37 +50,36 @@ export function useFocusReader() {
   }, [activeIndex])
 
   const handleAdvance = useCallback(() => {
-    if (activeIndex >= totalSentences - 1) {
-      // Session Complete
-      const sessionDurationMinutes =
-        (Date.now() - sessionStartTimeRef.current) / 60000
-      // Prevent division by zero
-      const validDuration =
-        sessionDurationMinutes > 0 ? sessionDurationMinutes : 0.1
-      const avgWpm = Math.round(totalWordsReadRef.current / validDuration)
-
-      setFinalWpm(avgWpm)
-      setIsResultOpen(true)
-      return
-    }
-
+    // 1. Capture Data Kalimat SAAT INI (sebelum pindah index)
     const now = Date.now()
+    const timeElapsed = now - lastAdvanceTimeRef.current
     const currentSentence = sentences[activeIndex]
+    
+    // Safety check kalau array kosong/error
+    if (!currentSentence) return
+
     const wordCount = currentSentence.split(/\s+/).length
 
-    // Speed Trap Logic
-    // We only check if it's not the very first action (give them a buffer)
-    if (activeIndex > 0 && wordCount >= MIN_WORDS_FOR_SPEED_CHECK) {
-      const currentWpm = calculateWPM(
-        wordCount,
-        lastAdvanceTimeRef.current,
-        now
-      )
+    // --- SCORING LOGIC START ---
+    
+    // A. Check Drifting (Bengong > 20 detik)
+    // Cek hanya jika bukan kalimat pertama (kasih user waktu nafas di awal)
+    if (activeIndex > 0 && timeElapsed > 20000) {
+      setScore((prev) => Math.max(0, prev - 5))
+      setDistractionCount((prev) => prev + 1)
+      // Optional: Toast notif kalo mau
+      toast.warning(t('focusReaderFeature.driftWarning'), {
+        description: t('focusReaderFeature.driftWarningDesc'),
+      })
+    }
 
-      // SPEED TRAP: Anti-Skimming (> 650 WPM)
-      // If reading inhumanly fast, assume skimming.
-      // 650 is a reasonable upper bound for deep reading comprehension.
+    // B. Check Skimming (Ngebut > 650 WPM)
+    let isSkimming = false
+    if (activeIndex > 0 && wordCount >= MIN_WORDS_FOR_SPEED_CHECK) {
+      const currentWpm = calculateWPM(wordCount, lastAdvanceTimeRef.current, now)
+      
       if (currentWpm > 650) {
+        isSkimming = true
         setIsSpeedWarning(true)
         setScore((prev) => Math.max(0, prev - 10))
         setSkimmingCount((prev) => prev + 1)
@@ -89,34 +89,43 @@ export function useFocusReader() {
           duration: 2000,
         })
         
-        // Shake effect reset after animation
         setTimeout(() => setIsSpeedWarning(false), 500)
-        
-        // Do NOT advance totalWordsRead (skimming is not reading)
-        // We still advance the text index to let them continue, but with penalty.
       } else {
-        // Valid reading speed
         setWpm(currentWpm)
-        totalWordsReadRef.current += wordCount
       }
-    } else {
-      // Add words for small sentences too, just skip speed check
-      totalWordsReadRef.current += wordCount
     }
 
-    // Advance
+    // C. Update Total Words
+    // Kalau skimming, kata-katanya JANGAN dihitung sebagai "Words Read" (biar WPM avg jujur)
+    if (!isSkimming) {
+      totalWordsReadRef.current += wordCount
+    }
+    // --- SCORING LOGIC END ---
+
+
+    // 2. Check Finish Condition
+    // Cek apakah ini kalimat terakhir?
+    if (activeIndex >= totalSentences - 1) {
+      const sessionDurationMinutes = (Date.now() - sessionStartTimeRef.current) / 60000
+      const validDuration = sessionDurationMinutes > 0 ? sessionDurationMinutes : 0.01 // Prevent /0
+      
+      const avgWpm = Math.round(totalWordsReadRef.current / validDuration)
+
+      setFinalWpm(avgWpm)
+      setIsResultOpen(true)
+      return
+    }
+
+    // 3. Advance to Next
     setActiveIndex((prev) => prev + 1)
     lastAdvanceTimeRef.current = now
-    setIsSpeedWarning(false)
-  }, [activeIndex, totalSentences, sentences, t])
+    setIsSpeedWarning(false) // Reset warning visual state
+    
+  }, [activeIndex, totalSentences, sentences, t]) // Removed 'finalWpm' etc from deps
 
   const handleCreateSession = (text: string, id: string = 'custom') => {
     if (text.length > MAX_CHAR_LIMIT) {
-      toast.error(
-        t('focusReaderFeature.charLimitError', {
-          limit: MAX_CHAR_LIMIT.toLocaleString(),
-        })
-      )
+      toast.error(t('focusReaderFeature.charLimitError', { limit: MAX_CHAR_LIMIT }))
       return
     }
     if (text.trim().length === 0) {
@@ -126,19 +135,7 @@ export function useFocusReader() {
 
     setRawText(text)
     setCurrentArticleId(id)
-    
-    // Reset Everything
-    setActiveIndex(0)
-    setWpm(0)
-    setScore(100)
-    setSkimmingCount(0)
-    totalWordsReadRef.current = 0
-    setIsResultOpen(false)
-    
-    const now = Date.now()
-    lastAdvanceTimeRef.current = now
-    sessionStartTimeRef.current = now
-    
+    resetSession()
     setIsDrawerOpen(false)
     toast.success(t('focusReaderFeature.sessionInitialized'))
   }
@@ -148,9 +145,11 @@ export function useFocusReader() {
     setWpm(0)
     setScore(100)
     setSkimmingCount(0)
+    setDistractionCount(0) // Reset distraction
     totalWordsReadRef.current = 0
     setIsResultOpen(false)
     
+    // Reset Timer AGAR sinkron dengan mulai baca
     const now = Date.now()
     lastAdvanceTimeRef.current = now
     sessionStartTimeRef.current = now
@@ -158,22 +157,18 @@ export function useFocusReader() {
 
   // Keyboard navigation
   useEffect(() => {
-    const handleKeyDown = (e: globalThis.KeyboardEvent) => {
-      // If any modal/drawer is open, disable space/arrows
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (isDrawerOpen || isResultOpen) return
 
       if (e.code === 'Space' || e.code === 'ArrowRight') {
         e.preventDefault()
         handleAdvance()
       } else if (e.code === 'ArrowLeft') {
-        // Backtracking optional logic?
-        // For strict focus reader, backtracking might technically break flow,
-        // but for usability we keep it. 
-        // NOTE: We don't rollback totalWordsRead/Score on backtrack to keep it simple 
-        // and avoid gaming the system.
         if (activeIndex > 0) {
+          // Note: Backtracking tidak mengembalikan Score/WordsRead 
+          // untuk simplifikasi & mencegah user farming score bolak balik.
           setActiveIndex((prev) => prev - 1)
-          lastAdvanceTimeRef.current = Date.now() // Reset timer
+          lastAdvanceTimeRef.current = Date.now() // Reset timer biar pas balik kanan gak kena Skimming
         }
       }
     }
@@ -200,9 +195,9 @@ export function useFocusReader() {
     // Results
     score,
     skimmingCount,
+    distractionCount, // Exported
     isResultOpen,
     finalWpm,
     resetSession,
   }
 }
-

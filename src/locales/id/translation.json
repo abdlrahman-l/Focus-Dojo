@@ -123,11 +123,14 @@
     "emptyTextError": "Mohon masukkan teks.",
     "sessionInitialized": "Sesi membaca dimulai",
     "tapToStart": "Tap layar untuk pindah",
+    "driftWarning": "Fokus teralihkan",
+    "driftWarningDesc": "Jaga ritme bacamu.",
     "results": {
         "deepFocusIndex": "INDEKS FOKUS MENDALAM",
         "averageSpeed": "KECEPATAN RATA-RATA",
         "wpm": "WPM",
         "skimmingPenalty": "Penalti Skimming: {{count}}",
+        "focusDrifts": "Fokus Terputus: {{count}}",
         "retry": "BACA ULANG",
         "next": "LANJUT"
     }

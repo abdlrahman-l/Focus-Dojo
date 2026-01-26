@@ -24,6 +24,7 @@ export function FocusReader() {
     // Results
     score,
     skimmingCount,
+    distractionCount,
     isResultOpen,
     finalWpm,
     resetSession,
@@ -155,7 +156,7 @@ export function FocusReader() {
         score={score}
         wpm={finalWpm}
         skimmingCount={skimmingCount}
-        distractionCount={0}
+        distractionCount={distractionCount}
         articleTitle={
           currentArticleId && currentArticleId !== 'custom'
             ? t(
