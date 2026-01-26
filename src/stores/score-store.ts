@@ -17,7 +17,10 @@ interface ScoreState {
 }
 
 interface ScoreActions {
-  addAttempt: (feature: 'focusReader' | 'vocalGym' | 'zenType', score: number) => void
+  addAttempt: (
+    feature: 'focusReader' | 'vocalGym' | 'zenType',
+    score: number
+  ) => void
   checkDailyReset: () => void
   getRecoveryScore: () => number
   setInitialAttempt: (value: boolean) => void
@@ -47,18 +50,25 @@ export const useScoreStore = create<ScoreStore>()(
 
       addAttempt: (feature, score) => {
         set((state) => {
-          const newHistory = [...state.history[feature], score]
-          const sum = newHistory.reduce((a, b) => a + b, 0)
-          const newAverage = Math.round(sum / newHistory.length)
+          // 1. Masukin score baru ke history
+          const rawHistory = [...state.history[feature], score]
+
+          // 2. Ambil cuma 5 terakhir (The Rolling Window)
+          // Kalau history masih dikit (misal cuma 3), ya ambil semua.
+          const relevantHistory = rawHistory.slice(-5)
+
+          // 3. Hitung Rata-rata dari 5 terakhir itu
+          const sum = relevantHistory.reduce((a, b) => a + b, 0)
+          const newRollingAverage = Math.round(sum / relevantHistory.length)
 
           return {
             history: {
               ...state.history,
-              [feature]: newHistory,
+              [feature]: rawHistory, // History asli tetep simpen semua buat grafik (opsional)
             },
             scores: {
               ...state.scores,
-              [feature]: newAverage,
+              [feature]: newRollingAverage, // Skor utama pake Rolling Average
             },
           }
         })
@@ -97,7 +107,7 @@ export const useScoreStore = create<ScoreStore>()(
           scores.focusReader * 0.4 +
           scores.vocalGym * 0.3 +
           scores.zenType * 0.3
-        
+
         return Math.round(weightedScore)
       },
       setInitialAttempt: (value: boolean) => {
@@ -118,7 +128,7 @@ export const useScoreStore = create<ScoreStore>()(
  *
  * function MyComponent() {
  *   const { addAttempt, checkDailyReset, getRecoveryScore, scores } = useScoreStore()
- *   
+ *
  *   const recoveryScore = getRecoveryScore() // Derived value
  *
  *   useEffect(() => {
@@ -128,7 +138,7 @@ export const useScoreStore = create<ScoreStore>()(
  *   const handleComplete = (score: number) => {
  *     addAttempt('vocalGym', score)
  *   }
- * 
+ *
  *   return <div>Score: {scores.vocalGym}</div>
  * }
  */

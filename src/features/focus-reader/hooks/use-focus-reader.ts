@@ -6,9 +6,11 @@ import {
 } from '@/features/focus-reader/constants'
 import { splitIntoSentences, calculateWPM } from '@/features/focus-reader/utils'
 import { useTranslation } from 'react-i18next'
+import { useScoreStore } from '@/stores/score-store'
 
 export function useFocusReader() {
   const { t } = useTranslation()
+  const { addAttempt } = useScoreStore()
   const [rawText, setRawText] = useState(
     t('focusReaderFeature.sourceSelect.libraryItems.mental-fatigue.content')
   )
@@ -60,12 +62,16 @@ export function useFocusReader() {
 
     const wordCount = currentSentence.split(/\s+/).length
 
+    // Local mutable score for immediate sync
+    let currentScore = score
+
     // --- SCORING LOGIC START ---
     
     // A. Check Drifting (Bengong > 20 detik)
     // Cek hanya jika bukan kalimat pertama (kasih user waktu nafas di awal)
     if (activeIndex > 0 && timeElapsed > 20000) {
-      setScore((prev) => Math.max(0, prev - 5))
+      currentScore = Math.max(0, currentScore - 5)
+      setScore(currentScore)
       setDistractionCount((prev) => prev + 1)
       // Optional: Toast notif kalo mau
       toast.warning(t('focusReaderFeature.driftWarning'), {
@@ -81,7 +87,10 @@ export function useFocusReader() {
       if (currentWpm > 650) {
         isSkimming = true
         setIsSpeedWarning(true)
-        setScore((prev) => Math.max(0, prev - 10))
+        
+        currentScore = Math.max(0, currentScore - 10)
+        setScore(currentScore)
+        
         setSkimmingCount((prev) => prev + 1)
         
         toast.warning(t('focusReaderFeature.speedWarning'), {
@@ -111,6 +120,9 @@ export function useFocusReader() {
       
       const avgWpm = Math.round(totalWordsReadRef.current / validDuration)
 
+      // Save to Store using the locally updated score
+      addAttempt('focusReader', currentScore)
+
       setFinalWpm(avgWpm)
       setIsResultOpen(true)
       return
@@ -121,7 +133,7 @@ export function useFocusReader() {
     lastAdvanceTimeRef.current = now
     setIsSpeedWarning(false) // Reset warning visual state
     
-  }, [activeIndex, totalSentences, sentences, t]) // Removed 'finalWpm' etc from deps
+  }, [activeIndex, totalSentences, sentences, t, score, addAttempt])
 
   const handleCreateSession = (text: string, id: string = 'custom') => {
     if (text.length > MAX_CHAR_LIMIT) {
