@@ -101,14 +101,44 @@ export const useScoreStore = create<ScoreStore>()(
       },
 
       getRecoveryScore: () => {
-        const { scores } = get()
-        // Formula: (focusReader * 0.4) + (vocalGym * 0.3) + (zenType * 0.3)
-        const weightedScore =
-          scores.focusReader * 0.4 +
-          scores.vocalGym * 0.3 +
-          scores.zenType * 0.3
+        const { scores, history } = get()
 
-        return Math.round(weightedScore)
+        // TARGET: Harus main 4x per fitur biar dianggap "Sembuh Total" hari ini
+        const TARGET_ATTEMPTS = 4
+
+        // Logic Multiplier:
+        // Attempt 0 = 0%
+        // Attempt 1 = 70% (Base Confidence)
+        // Attempt 2 = 80%
+        // Attempt 3 = 90%
+        // Attempt 4 = 100% (Full Confidence)
+        const getMultiplier = (attempts: number) => {
+          if (attempts === 0) return 0
+
+          // Kita cap biar gak lebih dari 1.0 kalau main > 4x
+          const clampedAttempts = Math.min(attempts, TARGET_ATTEMPTS)
+
+          // Rumus: Base 0.6 + (0.4 * progress)
+          // Progress jalan dari 0.25 (1/4) sampai 1.0 (4/4)
+          const progress = clampedAttempts / TARGET_ATTEMPTS
+
+          // Base 0.6 artinya: Sekali main langsung dapet 60% dari nilai aslinya (ditambah progress)
+          // Coba itung: 0.6 + (0.4 * 0.25) = 0.7. Jadi start di 70%.
+          return 0.6 + 0.4 * progress
+        }
+
+        // Hitung kontribusi masing-masing fitur
+        const focusContribution =
+          scores.focusReader * 0.4 * getMultiplier(history.focusReader.length)
+        const vocalContribution =
+          scores.vocalGym * 0.3 * getMultiplier(history.vocalGym.length)
+        const zenContribution =
+          scores.zenType * 0.3 * getMultiplier(history.zenType.length)
+
+        // Totalin
+        return Math.round(
+          focusContribution + vocalContribution + zenContribution
+        )
       },
       setInitialAttempt: (value: boolean) => {
         set({ initialAttempt: value })
